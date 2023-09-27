@@ -431,3 +431,29 @@ export async function getRadials(){
   `)
   return data
 }
+
+export async function getPostsBySlug(slug: string){
+  const data = await fetchAPI(`
+  query posts {
+    posts {
+      nodes {
+        title
+        slug
+        content
+        featuredImage {
+          node {
+            mediaItemUrl
+          }
+        }
+      }
+    }
+  }
+  `)
+  let dataSorted: any = [];
+  data.posts.nodes.forEach((post: any) => {
+    if(post.slug === slug){
+      dataSorted.push(post)
+    }
+  });
+  return dataSorted
+}

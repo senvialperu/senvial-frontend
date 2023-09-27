@@ -2,17 +2,6 @@
 
 import { RadialProgress } from 'react-daisyui'
 
-interface Feature {
-    id: string;
-    title: string;
-    description: string;
-    showLink: boolean;
-    newTab: boolean;
-    url: string;
-    text: number;
-}
-
-
 export default function RadialProgresses({ radialProgresses }: any) {
     console.log('radial data', radialProgresses.radialProgresses.nodes[0].radials.nodes)
     const featuredImageUrl = radialProgresses.radialProgresses.nodes[0].featuredImage.node.mediaItemUrl;
@@ -23,6 +12,7 @@ export default function RadialProgresses({ radialProgresses }: any) {
     const description = radialProgresses.radialProgresses.nodes[0].description;
 
 
+    console.log('radials', radials)
     return (
         <div className="relative">
             <div
@@ -42,19 +32,16 @@ export default function RadialProgresses({ radialProgresses }: any) {
                 <p className="text-center pt-5 text-xl relative z-10">{description}</p>
             </div>
             <div
-                className={`grid grid-cols-1 md:grid-cols-4 lg:grid-cols-${columnCount} mx-auto justify-between items-center py-20 relative text-white`}
+                className={`grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 mx-auto justify-between items-center py-20 relative text-white`}
                 style={{ opacity: 1 }}
             >
-                {radials.map((radial: any) => (
+                {radials.map((radial: any, index: number) => (
                     <div
                         className="flex flex-col items-center m-5 md:m-10 opacity-100"
-                        key={radial.title}
+                        key={index}
                     >
                         <RadialProgress
-                            value={radial.percent}
-                            title={radial.title}
-                            size="10rem"
-                            thickness="10px"
+                            value={100}
                         >
                             {radial.text} %
                         </RadialProgress>

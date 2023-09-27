@@ -11,7 +11,6 @@ export default function HighlightedText({
   className,
   color,
 }: HighlightedTextProps) {
-  console.log('text recieved ', text)
   const tempText = text.split(" ");
   let result = [] as string[];
 
