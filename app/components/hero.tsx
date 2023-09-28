@@ -1,6 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
-import HighlightedText from "./highlightedText";
+import HighlightedText from "./highlighted-text";
 import { renderButtonStyle } from "../utils/render-button-style";
 
 import { getHero } from "../lib/api";
@@ -36,12 +36,12 @@ interface HeroProps {
 
 export default async function Hero() {
   const heroData = await getHero();
-  const imgUrl = heroData.heros.nodes[0].featuredImage.node.mediaItemUrl;
-  const altText = heroData.heros.nodes[0].featuredImage.node.altText;
+  const imgUrl = heroData.heros.nodes[1].featuredImage.node.mediaItemUrl;
+  const altText = heroData.heros.nodes[1].featuredImage.node.altText;
 
-  const title = heroData.heros.nodes[0].title;
-  const description = heroData.heros.nodes[0].content;
-  const buttons = heroData.heros.nodes[0].buttons.nodes;
+  const title = heroData.heros.nodes[1].title;
+  const description = heroData.heros.nodes[1].content;
+  const buttons = heroData.heros.nodes[1].buttons.nodes;
 
   return (
     <section className="bg-primary-content text-base-100">

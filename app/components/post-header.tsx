@@ -19,7 +19,7 @@ export default function PostHeader({
   date,
   author,
   categories,
-}: PostHeaderProps) {
+}: any) {
   return (
     <>
       <PostTitle>{title}</PostTitle>

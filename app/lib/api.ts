@@ -91,6 +91,12 @@ export async function getAllPostsForHome(preview: any) {
                 }
               }
             }
+            categories {
+              nodes {
+                slug
+                name
+              }
+            }
           }
         }
       }
@@ -219,28 +225,26 @@ export async function getPostAndMorePosts(slug: any, preview: any, previewData: 
 
 export async function getAllProducts(){
   const data = await fetchAPI(`
-    query AllProducts {
-      products(first: 10000) {
-        edges {
+  query products {
+    products {
+      nodes {
+        slug
+        title
+        productCategory {
           node {
-            id
-            name
+            title
             slug
-            description
-            image {
-              sourceUrl
-            }
-            productCategories {
-              edges {
-                node {
-                  name
-                }
-              }
-            }
           }
+        }
+        description
+        content
+        picture {
+          altText
+          sourceUrl
         }
       }
     }
+  }
   `)
   return data?.products
 }
@@ -351,6 +355,14 @@ export async function getFooter(){
         footerLogo {
           mediaItemUrl
         }
+        contactLinks {
+          nodes {
+            newTab
+            contactType
+            text
+            url
+          }
+        }
       }
     }
   }`)
@@ -432,7 +444,7 @@ export async function getRadials(){
   return data
 }
 
-export async function getPostsBySlug(slug: string){
+export async function getPostBySlug(slug: string){
   const data = await fetchAPI(`
   query posts {
     posts {
@@ -445,6 +457,13 @@ export async function getPostsBySlug(slug: string){
             mediaItemUrl
           }
         }
+        categories {
+          nodes {
+            slug
+            name
+          }
+        }
+        excerpt
       }
     }
   }
@@ -456,4 +475,238 @@ export async function getPostsBySlug(slug: string){
     }
   });
   return dataSorted
+}
+
+export async function getPostsByCategory(category: string) {
+  // Decodifica la categoría antes de usarla
+  const decodedCategory = decodeURIComponent(category);
+
+  const data = await fetchAPI(`
+  query posts {
+    posts {
+      edges {
+        node {
+          id
+          categories(where: {slug:"${decodedCategory}"}) {
+            edges {
+              node {
+                id
+                posts {
+                  nodes {
+                    title
+                    content
+                    featuredImage {
+                      node {
+                        mediaItemUrl
+                        sourceUrl
+                      }
+                    }
+                    categories {
+                      nodes {
+                        name
+                        slug
+                      }
+                    }
+                    author {
+                      node {
+                        firstName
+                        avatar {
+                          url
+                        }
+                      }
+                    }
+                    slug
+                    excerpt
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+  `, {
+    variables: {
+      decodedCategory,
+    },
+  });
+
+  return data.posts.edges;
+}
+
+export async function getBlogCategories(){
+  const data = await fetchAPI(`
+  query categories {
+    categories {
+      nodes {
+        slug
+        name
+      }
+    }
+  }
+  `)
+  return data
+}
+
+export async function getIconTextDivs(){
+  const data = await fetchAPI(`
+  query iconTextDivs {
+    iconTextDivs {
+      nodes {
+        text
+        icon
+      }
+    }
+  }
+  `)
+  return data
+}
+
+export async function getClients(){
+  const data = await fetchAPI(`
+  query iconTextDivs {
+    clientes {
+      nodes {
+        title
+        picture {
+          sourceUrl
+        }
+      }
+    }
+  }
+  `)
+  return data
+}
+
+export async function getProductsByCategory(category: string){
+  let sortedProducts: any = [];
+  const data = await fetchAPI(`
+  query postByCategory {
+    products {
+      edges {
+        node {
+          description
+          title
+          slug
+          picture {
+            altText
+            sourceUrl
+          }
+          content
+          productCategory {
+            node {
+              title
+              slug
+            }
+          }
+        }
+      }
+    }
+  }
+  `)
+  if (category === 'all'){
+    return data.products.edges
+  }else{
+    data.products.edges.map((product: any) => {
+      if(product.node.productCategory.node.slug === category){
+        sortedProducts.push(product)
+      }
+    })
+  }
+  return sortedProducts
+}
+
+export async function getProductBySlug(slug: string){
+  const data = await fetchAPI(`
+  query postByCategory {
+    products {
+      edges {
+        node {
+          description
+          title
+          slug
+          picture {
+            altText
+            sourceUrl
+          }
+          content
+          productCategory {
+            node {
+              title
+              slug
+            }
+          }
+        }
+      }
+    }
+  }
+  `)
+  let dataSorted: any = [];
+  data.products.edges.forEach((product: any) => {
+    if(product.node.slug === slug){
+      dataSorted.push(product)
+    }
+  });
+  console.log('sorted slug product', dataSorted)
+  return dataSorted
+}
+
+export async function getProductCategories(){
+  const data = await fetchAPI(`
+  query productCategories {
+    productCategories {
+      nodes {
+        slug
+        title
+      }
+    }
+  }
+  `)
+  return data
+}
+
+export async function getServices(){
+  const data = await fetchAPI(`
+  query services {
+    services {
+      nodes {
+        picture {
+          altText
+          sourceUrl
+        }
+        slug
+        title
+        content
+        id
+        description
+      }
+    }
+  }
+  `)
+  return data
+
+}
+
+export async function getServiceBySlug(slug: string){
+  const data = await fetchAPI(`
+  query services {
+    services {
+      nodes {
+        picture {
+          altText
+          sourceUrl
+        }
+        slug
+        title
+        content
+        id
+        description
+      }
+    }
+  }
+  `)
+
+  const service = data.services.nodes.find((service: any) => service.slug === slug);
+  return service;
 }

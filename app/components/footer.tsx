@@ -35,7 +35,7 @@ interface ContactLinks {
 function FooterContact(data: ContactLinks) {
   return (
     <li className="flex gap-4 align-middle justify-start ">
-      <RenderContactIcon data={data.contactType} />
+      <RenderContactIcon data={data.contactType[0]} />
       <Link
         href={data.url}
         className="hover:dark:text-primary align-middle mb-4"
@@ -87,27 +87,28 @@ function PagesLink(link: PagesLink) {
 
 function RenderSocialIcon({ social }: { social: string | undefined }) {
   switch (social) {
-    case "WEBSITE":
+    case "website":
       return <CgWebsite />;
-    case "FACEBOOK":
+    case "facebook":
       return <AiFillFacebook />;
-    case "LINKEDIN":
+    case "linkedin":
       return <AiFillLinkedin />;
-    case "TWITTER":
+    case "twitter":
       return <AiFillTwitterCircle />;
-    case "YOUTUBE":
+    case "youtube":
       return <AiFillYoutube />;
     default:
       return null;
   }
 }
+
 function RenderContactIcon({ data }: { data: string | undefined }) {
   switch (data) {
-    case "PHONE":
+    case "phone":
       return <AiFillPhone className="h-8 w-8 bg-black rounded-full p-2" />;
-    case "EMAIL":
+    case "email":
       return <AiFillMail className="h-8 w-8 bg-black rounded-full p-2" />;
-    case "ADDRESS":
+    case "address":
       return <AiFillHome className="h-8 w-8 bg-black rounded-full p-2" />;
     default:
       return null;
@@ -118,7 +119,6 @@ export default function Footer({
   logoText,
   menuLinks,
   categoryLinks,
-
   pagesLinks,
   contactLinks,
   socialLinks,
@@ -127,7 +127,6 @@ export default function Footer({
   logoText: any;
   menuLinks: any;
   categoryLinks: any;
-
   pagesLinks: any;
   contactLinks: any;
   socialLinks: any;
@@ -145,9 +144,9 @@ export default function Footer({
           <div className="col-span-6 text-left md:pt-0 md:text-left md:col-span-2">
             <p className="pb-1 text-lg font-medium">HISTORIA</p>
             <ul>
-              {pagesLinks.map((link: any) => {
+              {pagesLinks.map((link: any, index: number) => {
                 return (
-                  <PagesLink key={link.id} {...link} />
+                  <PagesLink key={index} {...link} />
                 )
               })}
             </ul>
@@ -156,8 +155,8 @@ export default function Footer({
           <div className="col-span-6 text-left md:text-left md:col-span-2">
             <p className="pb-1 text-lg font-medium">ELEMENTOS</p>
             <ul>
-              {menuLinks.map((link: any) => (
-                <FooterLink key={link.id} {...link} />
+              {menuLinks.map((link: any, index: number) => (
+                <FooterLink key={index} {...link} />
               ))}
             </ul>
           </div>
@@ -165,8 +164,8 @@ export default function Footer({
           <div className="col-span-6 text-left md:text-left md:col-span-2">
             <p className="pb-1 text-lg font-medium">CONTACTO</p>
             <ul className="align-middle">
-              {contactLinks.map((link: any) => (
-                <FooterContact key={link.id} {...link} />
+              {contactLinks.map((link: any, index: number) => (
+                <FooterContact key={index} {...link} />
               ))}
             </ul>
           </div>
@@ -190,7 +189,7 @@ export default function Footer({
                   target={link.newTab ? "_blank" : "_self"}
                   className="flex items-center justify-center w-10 h-10 rounded-full bg-secondary text-primary-content"
                 >
-                  <RenderSocialIcon social={link.social} />
+                  <RenderSocialIcon social={link.social[0]} />
                 </a>
               );
             })}

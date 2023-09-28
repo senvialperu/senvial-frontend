@@ -1,6 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
-import HighlightedText from "./highlightedText";
+import HighlightedText from "./highlighted-text";
 import { renderButtonStyle } from "../utils/render-button-style";
 import { getHero } from "../lib/api";
 
@@ -43,9 +43,9 @@ export default async function HeroLeft() {
     const buttons = heroData.heros.nodes[0].buttons.nodes;
     return (
 
-        <section className="bg-primary-content text-base-100" style={{ background: `url(${imgUrl})`, backgroundSize: 'cover' }}>
-            <div className="container justify-end p-6 mx-auto sm:py-12 lg:py-24 lg:ml-auto h-auto relative">
-                <div className="flex flex-col justify-end lg:ml-auto p-10 text-center rounded-lg  lg:text-left bg-primary-content h-auto">
+        <section className="bg-primary-content text-base-100 items-center justify-end flex" style={{ background: `url(${imgUrl})`, backgroundSize: 'cover' }}>
+            <div className="flex justify-center items-center p-6 sm:py-12 lg:py-24 md:w-[40%] h-auto md:mx-20  w-full">
+                <div className=" lg:ml-auto p-10 text-center rounded-lg  lg:text-left bg-primary-content h-auto">
                     <HighlightedText
                         text={title}
                         tag="h1"

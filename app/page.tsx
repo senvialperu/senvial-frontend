@@ -1,20 +1,25 @@
 import Image from 'next/image'
 import Hero from './components/hero'
 import Hero2 from './components/hero2'
-import { getSlider, getRadials } from './lib/api'
+import { getSlider, getRadials, getIconTextDivs, getClients } from './lib/api'
 import Slider from './components/slider'
-import RadialProgresses from './components/radialProgress'
-
+import RadialProgresses from './components/radial-progress'
+import IconTextDivs from './components/icon-text-divs'
+import TrustedBy from './components/trusted-by'
 
 export default async function Home() {
   const sliderData = await getSlider()
-  const radialProgresses = await getRadials();
+  const radialProgressesData = await getRadials();
+  const iconTextDivsData = await getIconTextDivs();
+  const trustedByData = await getClients();
   return (
-    <main className="flex min-h-screen flex-col justify-between pt-24">
+    <main className="flex min-h-screen flex-col justify-between">
       <Slider data={sliderData} />
-      <Hero2 />
+      <IconTextDivs data={iconTextDivsData} />
       <Hero />
-      <RadialProgresses radialProgresses={radialProgresses} />
+      <Hero2 />
+      <RadialProgresses radialProgresses={radialProgressesData} />
+      <TrustedBy data={trustedByData} />
     </main>
   )
 }

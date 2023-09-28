@@ -11,6 +11,7 @@ export default async function Blog() {
 
   const heroPost = allPosts.edges[0]?.node
   const morePosts = allPosts.edges.slice(1)
+
   return (
     <Container>
       <Intro />
