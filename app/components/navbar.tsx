@@ -118,7 +118,7 @@ function NavExpandableLink({ url, text, product_categories, services }: any) {
                   <h1 className="p-2 w-full text-primary-content">SERVICIOS</h1>
                 </Link>
                 {isExpandedServices && (
-                  <div className="absolute w-full left-[16.2rem] bg-transparent z-10" style={{ top: '55%' }}>
+                  <div className="absolute w-full min-[1280px]:left-[16em] bg-transparent z-10 min-[1280px]:inset-12 pt-[2px]">
                     <ul className="flex flex-col gap-[2px]">
                       {services.nodes.map((item: any) => (
                         <li key={item.title} className="p-2 bg-black hover:bg-secondary hover:text-primary-content w-full">
@@ -376,7 +376,7 @@ export default function Navbar({
 
       <div className={`lg:flex hidden align-middle items-center justify-center text-default w-[80%] mx-auto text-base-100 sticky ${isSticky ? 'top-0 w-full ' : 'bottom-10'} z-10`} style={{ marginBottom: "-50px", width: '100%' }}>
         <div className={`bg-primary-content w-full p-10 ${isSticky ? 'py-6 ' : ''}`} style={{ width: isSticky ? '100%' : '80%' }}>
-          <ul className="flex justify-center divide-x divide-slate-500">
+          <ul className="flex justify-evenly divide-x divide-slate-500">
             {links.slice(0, linksMiddle).map((item: any, index: number) => (
               <span
                 className={`w-auto`}

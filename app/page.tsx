@@ -1,4 +1,3 @@
-import Image from 'next/image'
 import Hero from './components/hero'
 import Hero2 from './components/hero2'
 import { getSlider, getRadials, getIconTextDivs, getClients } from './lib/api'

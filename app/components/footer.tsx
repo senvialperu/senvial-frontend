@@ -34,11 +34,11 @@ interface ContactLinks {
 
 function FooterContact(data: ContactLinks) {
   return (
-    <li className="flex gap-4 align-middle justify-start ">
+    <li className="flex gap-4 justify-start">
       <RenderContactIcon data={data.contactType[0]} />
       <Link
         href={data.url}
-        className="hover:dark:text-primary align-middle mb-4"
+        className="hover:text-primary mt-1"
       >
         {data.text}
       </Link>
@@ -134,7 +134,7 @@ export default function Footer({
   return (
     <footer className="py-6 bg-primary-content dark:text-gray-50">
       <div className="container px-6 mx-auto space-y-6 divide-y md:space-y-12 divide-opacity-50">
-        <div className="grid grid-cols-12">
+        <div className="grid grid-cols-12 gap-4">
           <div className="pb-6 col-span-full md:pb-0 md:col-span-5">
             <Logo src={logoUrl}>
               {logoText && <h2 className="text-2xl font-bold"></h2>}
