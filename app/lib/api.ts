@@ -734,3 +734,20 @@ export async function getPageBySlug(slug: string){
   const page = data.pages.nodes.find((page: any) => page.slug === slug);
   return page
 }
+
+export async function getLogo(){
+  const data = fetchAPI(`
+  query image {
+    mediaItems(first: 100, where: {title: "favicon"}) {
+      nodes {
+        altText
+        sourceUrl
+        id
+        slug
+        title
+      }
+    }
+  }
+  `)
+  return data
+}

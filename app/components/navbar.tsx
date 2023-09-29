@@ -71,13 +71,12 @@ function NavLink({ url, text }: NavLink) {
   );
 }
 function NavExpandableLink({ url, text, product_categories, services }: any) {
-  // parent del dropdown
   const parentRef = useRef<HTMLDivElement>(null);
   useEffect(() => {
     if (parentRef.current) {
       autoAnimate(parentRef.current);
     }
-  }, [parentRef])
+  }, [parentRef]);
 
   const [isExpanded, setIsExpanded] = useState(false);
   const [isExpandedServices, setIsExpandedServices] = useState(false);
@@ -90,7 +89,7 @@ function NavExpandableLink({ url, text, product_categories, services }: any) {
     setIsExpanded(false);
   };
 
-  const handleMouseEnterServicves = () => {
+  const handleMouseEnterServices = () => {
     setIsExpandedServices(true);
   };
 
@@ -99,7 +98,7 @@ function NavExpandableLink({ url, text, product_categories, services }: any) {
   };
 
   return (
-    <div className="px-10 relative group w-auto justify-center lg:w-full " onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave} ref={parentRef}>
+    <div className="px-10 relative group w-auto justify-center lg:w-full" onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave} ref={parentRef}>
       <Link href={url} className={`flex items-center -mb-1`}>
         {text}
       </Link>
@@ -113,17 +112,22 @@ function NavExpandableLink({ url, text, product_categories, services }: any) {
                   <p className="w-full">{item.name}</p>
                 </Link>
               ))}
-              <div onMouseEnter={handleMouseEnterServicves} onMouseLeave={handleMouseLeaveServices} ref={parentRef}>
+              <div
+                onMouseEnter={handleMouseEnterServices}
+                onMouseLeave={handleMouseLeaveServices}
+                ref={parentRef}
+                style={{ position: 'relative', zIndex: 999 }}
+              >
                 <Link href={url} className={`flex items-center bg-secondary `}>
                   <p className="p-2 w-full text-primary-content">SERVICIOS</p>
                 </Link>
                 {isExpandedServices && (
-                  <div className="absolute w-full min-[1280px]:left-[16em] bg-transparent z-10 min-[1280px]:inset-12 pt-[2px]">
+                  <div className="absolute left-0 bg-transparent z-10" style={{ top: '0', marginLeft: '100%' }}>
                     <ul className="flex flex-col gap-[2px]">
                       {services.nodes.map((item: any) => (
                         <li key={item.title} className="p-2 bg-black hover:bg-secondary hover:text-primary-content w-full">
                           <Link href={`/servicios/${item.slug}`} className={``}>
-                            <p className="w-full">{item.title}</p>
+                            <p className="w-48">{item.title}</p>
                           </Link>
                         </li>
                       ))}
@@ -137,8 +141,8 @@ function NavExpandableLink({ url, text, product_categories, services }: any) {
       )}
     </div>
   );
-
 }
+
 function MobileNavLink({ url, text, closeMenu }: MobileNavLink) {
   const path = usePathname();
   const handleClick = () => {

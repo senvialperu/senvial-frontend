@@ -6,7 +6,10 @@ import Navbar from './components/navbar';
 import Footer from './components/footer';
 
 // fetcher
-import { getFooter, getGlobal, getNavbar } from './lib/api';
+import { getFooter, getGlobal, getNavbar, getLogo } from './lib/api';
+
+// floating whstapp button
+import WhatsappButton from './components/whatsapp-button'
 
 const quicksand = Quicksand({
   style: ["normal"],
@@ -29,6 +32,10 @@ async function getGlobalData() {
 }
 
 export default async function RootLayout({ children, }: { children: React.ReactNode }) {
+
+  // logo 
+  const logo = await getLogo();
+
   const { navbar, footer } = await getGlobalData();
   const location = navbar.navbars.nodes[0].location;
   const navbarLogo = navbar.navbars.nodes[0].navbarLogo;
@@ -49,6 +56,8 @@ export default async function RootLayout({ children, }: { children: React.ReactN
   return (
     <html lang="es">
       <body className={`${quicksand.className}`}>
+        <WhatsappButton logoUrl={logo} />
+
         <Navbar locationText={location} logoUrl={navbarLogo.mediaItemUrl} whatsappLink={whatsapp} links={links} socialLinks={socialLinks} acordeonLinks={acordeonLinks} logoText="senvial" />
 
         <main>

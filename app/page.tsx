@@ -5,6 +5,7 @@ import Slider from './components/slider'
 import RadialProgresses from './components/radial-progress'
 import IconTextDivs from './components/icon-text-divs'
 import TrustedBy from './components/trusted-by'
+// floating button whatsapp
 
 export default async function Home() {
   const sliderData = await getSlider()
