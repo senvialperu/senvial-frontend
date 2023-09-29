@@ -1,10 +1,22 @@
+'use client'
+import React, { useEffect, useState } from 'react';
+import cheerio from 'cheerio';
 import Image from 'next/image';
+
+function justifyH2Text(content) {
+    const $ = cheerio.load(content);
+
+    // Selecciona todas las etiquetas <h2>, <h1>, <h3>, <p>, <h4> dentro del contenido HTML y aplica estilos CSS.
+    $('h2, h1, h3, p, h4').css('text-align', 'justify');
+
+    return $.html();
+}
 
 
 export default function Service({ data }: { data: any }) {
     console.log('data service', data)
-    const { title, description, picture } = data;
-    console.log('picture', picture)
+    const { title, description, picture, content } = data;
+    const justifiedContent = justifyH2Text(content);
 
     return (
         <article className="space-y-8">
@@ -25,6 +37,9 @@ export default function Service({ data }: { data: any }) {
 
             <div className="text-primary-content">
                 <p>{description}</p>
+            </div>
+            <div className="leading-relaxed mb-4">
+                <div dangerouslySetInnerHTML={{ __html: justifiedContent }} />
             </div>
         </article>
     );

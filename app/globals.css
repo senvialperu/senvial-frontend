@@ -1,3 +1,43 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+
+@layer base {
+    h1 {
+      @apply text-2xl;
+    }
+    h2 {
+      @apply text-xl;
+      @apply text-right
+    }
+    h3 {
+      @apply text-lg;
+    }
+    /* ... */
+    }  
+    @media screen and (max-width: 768px) {
+      div.grid-container {
+          display: grid;
+          grid-template-columns: 1fr; /* Una columna para pantallas móviles */
+          gap: 10px; /* Espacio entre las imágenes */
+      }
+  }
+  
+  /* Estilo para tabletas */
+  @media screen and (min-width: 769px) and (max-width: 1024px) {
+      div.grid-container {
+          display: grid;
+          grid-template-columns: repeat(2, 1fr); /* Dos columnas para tabletas */
+          gap: 10px; /* Espacio entre las imágenes */
+      }
+  }
+  
+  /* Estilo para PC */
+  @media screen and (min-width: 1025px) {
+      div.grid-container {
+          display: grid;
+          grid-template-columns: repeat(4, 1fr); /* Cuatro columnas para PC */
+          gap: 10px; /* Espacio entre las imágenes */
+      }
+  }

@@ -12,6 +12,9 @@ export default async function Blog() {
   const heroPost = allPosts.edges[0]?.node
   const morePosts = allPosts.edges.slice(1)
 
+  console.log('allposts', allPosts.edges)
+  console.log('category page', heroPost.categories.nodes)
+
   return (
     <Container>
       <Intro />
@@ -23,6 +26,7 @@ export default async function Blog() {
           author={heroPost.author}
           slug={heroPost.slug}
           excerpt={heroPost.excerpt}
+          category={heroPost.categories.nodes[0]}
         />
       )}
       {morePosts.length > 0 && <MoreStories posts={morePosts} />}

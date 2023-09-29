@@ -31,12 +31,12 @@ export default function IconTextDivs({ data: { iconTextDivs } }: any) {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 items-center justify-center">
             {iconTextDivs.nodes.map((iconText: any, index: number) => (
                 <div
-                    className={`flex flex-col h-auto min-h-full items-center br-10 bg-neutral-content p-10 text-left${index < iconTextDivs.nodes - 1 && 'border-neutral-content'
+                    className={`flex flex-col h-auto min-h-full items-center br-10 bg-neutral-content p-5 py-10 lg:p-10 text-left${index < iconTextDivs.nodes - 1 && 'border-neutral-content'
                         } ${index % cols === cols - 1 && 'lg:border-r-2'}`}
                     key={index}
                 >
                     <RenderIcons type={iconText.icon[0]} />
-                    <h1 className="text-xl text-primary-content px-10">{iconText.text}</h1>
+                    <h1 className="text-xl text-primary-content mt-10 text-justify">{iconText.text}</h1>
                 </div>
             ))}
         </div>

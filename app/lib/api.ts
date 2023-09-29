@@ -425,6 +425,8 @@ export async function getRadials(){
   query radials {
     radialProgresses {
       nodes {
+        title
+        description
         featuredImage {
           node {
             mediaItemUrl
@@ -709,4 +711,26 @@ export async function getServiceBySlug(slug: string){
 
   const service = data.services.nodes.find((service: any) => service.slug === slug);
   return service;
+}
+
+export async function getPageBySlug(slug: string){
+  const data = await fetchAPI(`
+  query historiaPage {
+    pages {
+      nodes {
+        content
+        title
+        slug
+        featuredImage {
+          node {
+            sourceUrl
+            altText
+          }
+        }
+      }
+    }
+  }
+  `)
+  const page = data.pages.nodes.find((page: any) => page.slug === slug);
+  return page
 }

@@ -7,7 +7,7 @@ interface Props {
   coverImage: {
     node: {
       mediaItemUrl: string
-      sourceUlr: string
+      sourceUrl: string
     }
   }
   slug?: string
@@ -20,7 +20,7 @@ export default function CoverImage({ title, coverImage, slug, category }: Props)
       width={1000}
       height={1000}
       alt={`Cover Image for ${title}`}
-      src={coverImage?.node.mediaItemUrl}
+      src={coverImage?.node.sourceUrl}
       className={cn('shadow-small', {
         'hover:shadow-medium transition-shadow duration-200': slug,
       })}

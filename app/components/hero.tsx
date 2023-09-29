@@ -68,7 +68,7 @@ export default async function Hero() {
           <HighlightedText
             text={description}
             tag="p"
-            className="tmt-6 mb-8 text-lg sm:mb-12"
+            className="tmt-6 mb-8 text-lg sm:mb-12 text-justify"
             color="text-default"
           />
           <div className="flex flex-col space-y-4 sm:items-center sm:justify-center sm:flex-row sm:space-y-0 sm:space-x-4 lg:justify-start">

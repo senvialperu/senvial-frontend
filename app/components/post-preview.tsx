@@ -12,6 +12,7 @@ export default function PostPreview({
   slug,
   category,
 }: any) {
+  console.log('category', category)
   return (
     <div>
       <div className="mb-5">
@@ -21,7 +22,7 @@ export default function PostPreview({
       </div>
       <h3 className="text-3xl mb-3 leading-snug">
         <Link
-          href={`/blog/${slug}`}
+          href={`/blog/${category}/${slug}`}
           className="hover:underline"
           dangerouslySetInnerHTML={{ __html: title }}
         ></Link>

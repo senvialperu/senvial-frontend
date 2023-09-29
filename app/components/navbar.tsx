@@ -110,20 +110,20 @@ function NavExpandableLink({ url, text, product_categories, services }: any) {
             <ul className="flex flex-col gap-[2px]">
               {product_categories.nodes.map((item: any) => (
                 <Link href={`/productos/${item.slug}`} className={`  p-2 bg-black w-full hover:bg-secondary hover:text-primary-content`} key={item.id}>
-                  <h1 className="w-full">{item.name}</h1>
+                  <p className="w-full">{item.name}</p>
                 </Link>
               ))}
               <div onMouseEnter={handleMouseEnterServicves} onMouseLeave={handleMouseLeaveServices} ref={parentRef}>
                 <Link href={url} className={`flex items-center bg-secondary `}>
-                  <h1 className="p-2 w-full text-primary-content">SERVICIOS</h1>
+                  <p className="p-2 w-full text-primary-content">SERVICIOS</p>
                 </Link>
                 {isExpandedServices && (
-                  <div className="absolute w-full lg:left-[16.2rem] md:left-[0rem] left-0 bg-transparent z-10" style={{ top: '55%' }}>
+                  <div className="absolute w-full min-[1280px]:left-[16em] bg-transparent z-10 min-[1280px]:inset-12 pt-[2px]">
                     <ul className="flex flex-col gap-[2px]">
                       {services.nodes.map((item: any) => (
                         <li key={item.title} className="p-2 bg-black hover:bg-secondary hover:text-primary-content w-full">
                           <Link href={`/servicios/${item.slug}`} className={``}>
-                            <h1 className="w-full">{item.title}</h1>
+                            <p className="w-full">{item.title}</p>
                           </Link>
                         </li>
                       ))}
@@ -182,27 +182,27 @@ function MobileNavExpandableLink({ url, text, product_categories, services }: an
             {product_categories.nodes.map((item: any) => (
               <li key={item.name} className="p-2 w-full hover:bg-secondary hover:text-primary-content">
                 <Link href={`/productos/${item.slug}`} className="border-b-2 dark:border-transparent">
-                  <h1 className="w-full">{item.name}</h1>
+                  <p className="w-full">{item.name}</p>
                 </Link>
               </li>
             ))}
             {product_categories.nodes.map((item: any) => (
               <Link href={`/productos/${item.slug}`} className={`p-2 w-full hover:bg-secondary hover:text-primary-content`} key={item.id}>
-                <h1 className="w-full">{item.name}</h1>
+                <p className="w-full">{item.name}</p>
               </Link>
             ))}
             <li onClick={handleClickServices} className="p-2 hover:text-primary-content w-full cursor-pointer">
               <div className={`flex items-center mx-4 -mb-1 border-b-2 dark:border-transparent`}>
-                <h1 className="p-2 w-full text-primary-content">SERVICIOS</h1>
+                <p className="p-2 w-full text-primary-content">SERVICIOS</p>
                 <ChevronDownIcon width={20} height={20} />
               </div>
               {isExpandedServices && (
                 <div className="relative w-full bg-transparent z-10" style={{ top: '100%' }}>
                   <ul className="flex flex-col">
                     {services.nodes.map((item: any, index: number) => (
-                      <li key={index} className="p-2 hover:bg-secondary hover:text-primary-content w-full">
+                      <li key={index} className="m-2 ml-10 hover:bg-secondary hover:text-primary-content w-full">
                         <Link href={`/servicios/${item.slug}`} className={`border-b-2 dark:border-transparent`}>
-                          <h1 className="w-full">{item.title}</h1>
+                          <p className="w-full">{item.title}</p>
                         </Link>
                       </li>
                     ))}
@@ -293,7 +293,7 @@ export default function Navbar({
                 <MapPinIcon className="h-8 w-8 text-default" aria-hidden="true" />
               </div>
               <div>
-                <h1 className="max-w-xs">{locationText}</h1>
+                <p className="max-w-xs">{locationText}</p>
               </div>
             </div>
             <div className="grid gap-2">

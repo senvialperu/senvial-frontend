@@ -20,16 +20,13 @@ export default function ProductSelect({
     };
 }) {
     categories = categories.productCategories.nodes
-    console.log('categories ps', categories)
-
     return (
-        <div className="p-4 rounded-lg bg-secondary-content min-h-[365px] relative text-white">
+        <div className="p-4 rounded-lg bg-secondary-content min-h-[365px] relative text-white space-y-4">
             <h4 className="text-xl font-semibold">Buscar por categoria</h4>
 
             <div>
-                <div className="flex flex-wrap py-6 space-x-2 text-white">
+                <div className="flex flex-wrap gap-2 text-white ">
                     {categories.map((category: any, index: number) => {
-                        console.log('current and selected', category, params.category)
                         if (category === 0) return null;
                         return (
                             <Link
@@ -50,7 +47,7 @@ export default function ProductSelect({
                 </div>
 
 
-                <div className="space-y-2">
+                <div className="space-y-4 mt-4">
                     <h4 className="text-lg font-semibold">Otros productos</h4>
                     <ul className="ml-4 space-y-1 list-disc">
                         {products.map((product: any, index: number) => {

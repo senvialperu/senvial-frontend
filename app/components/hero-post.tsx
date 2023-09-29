@@ -10,7 +10,10 @@ export default function HeroPost({
   excerpt,
   author,
   slug,
+  category,
 }) {
+  console.log('cover Image', coverImage)
+
   return (
     <section>
       <div className="mb-8 md:mb-16">
@@ -22,7 +25,7 @@ export default function HeroPost({
         <div>
           <h3 className="mb-4 text-4xl lg:text-6xl leading-tight">
             <Link
-              href={`/blog/${slug}`}
+              href={`/blog/${category.slug}/${slug}`}
               className="hover:underline"
               dangerouslySetInnerHTML={{ __html: title }}
             ></Link>
