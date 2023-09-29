@@ -118,7 +118,7 @@ function NavExpandableLink({ url, text, product_categories, services }: any) {
                   <h1 className="p-2 w-full text-primary-content">SERVICIOS</h1>
                 </Link>
                 {isExpandedServices && (
-                  <div className="absolute w-full left-[16.2rem] bg-transparent z-10" style={{ top: '55%' }}>
+                  <div className="absolute w-full lg:left-[16.2rem] md:left-[0rem] left-0 bg-transparent z-10" style={{ top: '55%' }}>
                     <ul className="flex flex-col gap-[2px]">
                       {services.nodes.map((item: any) => (
                         <li key={item.title} className="p-2 bg-black hover:bg-secondary hover:text-primary-content w-full">
