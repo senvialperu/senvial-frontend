@@ -17,7 +17,6 @@ export default function ServiceSelect({
     };
 }) {
     services = services.services.nodes
-    console.log('services', services)
     return (
         <div className="p-4 rounded-lg bg-secondary-content min-h-[365px] relative text-white">
             <div>

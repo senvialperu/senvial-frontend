@@ -4,7 +4,7 @@ import cheerio from 'cheerio';
 const ContentContainer = (dataContainer: any) => {
     const images = dataContainer;
     const content = dataContainer.data.text
-    console.log('data container', content)
+
 
     const justifiedContent = justifyH2Text(content);
 

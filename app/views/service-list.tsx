@@ -9,13 +9,10 @@ export default function ServiceList({
     children?: React.ReactNode;
 }) {
     services = services.services;
-    console.log('services', services)
-
     return (
         <section className="container p-6 mx-auto space-y-6 sm:space-y-12">
             <div className="grid justify-center grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 text-white">
                 {services.nodes.map((service: any) => {
-                    console.log('service1', service)
                     const imageUrl = service?.picture?.sourceUrl
                     return (
                         <Link

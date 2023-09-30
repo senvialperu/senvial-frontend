@@ -1,9 +1,9 @@
+'use client'
 import React, { useState, useEffect } from 'react';
 import Image from 'next/image';
 import { motion } from 'framer-motion';
 
 const ImageGallery = ({ data }: any) => {
-    console.log('data images container', data.data.images);
     const images = data.data.images;
     const [selectedImageId, setSelectedImageId] = useState(images[0].id);
 

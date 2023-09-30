@@ -622,37 +622,36 @@ export async function getProductsByCategory(category: string){
 export async function getProductBySlug(slug: string){
   const data = await fetchAPI(`
   query postByCategory {
-    products {
-      edges {
-        node {
-          description
-          title
-          slug
-          picture {
-            altText
-            sourceUrl
+  products {
+    edges {
+      node {
+        description
+        title
+        slug
+        picture {
+          altText
+          sourceUrl
+        }
+        content
+        productCategory {
+          node {
+            title
+            slug
           }
-          content
-          productCategory {
-            node {
-              title
-              slug
+        }
+        contentContainer {
+          nodes {
+            images {
+              altText
+              sourceUrl
             }
-          }
-          contentContainer {
-            nodes {
-              images {
-                altText
-                sourceUrl
-                id
-              }
-              text
-            }
+            text
           }
         }
       }
     }
   }
+}
   `)
   let dataSorted: any = [];
   data.products.edges.forEach((product: any) => {
@@ -660,6 +659,7 @@ export async function getProductBySlug(slug: string){
       dataSorted.push(product)
     }
   });
+  console.log('sorted slug product', dataSorted)
   return dataSorted
 }
 
@@ -713,6 +713,16 @@ export async function getServiceBySlug(slug: string){
         content
         id
         description
+        contentContainer {
+          nodes {
+            images {
+              id
+              altText
+              sourceUrl
+            }
+            text
+          }
+        }
       }
     }
   }
