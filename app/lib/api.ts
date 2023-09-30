@@ -682,6 +682,20 @@ export async function getProductCategories(){
   return data
 }
 
+export async function getServicesCategories(){
+  const data = await fetchAPI(`
+  query servicesCategories {
+    serviceCategories {
+      nodes {
+        slug
+        title
+      }
+    }
+  }
+  `)
+  return data
+}
+
 export async function getServices(){
   const data = await fetchAPI(`
   query services {
@@ -696,6 +710,11 @@ export async function getServices(){
         content
         id
         description
+        serviceCategories {
+          nodes {
+            slug
+          }
+        }
       }
     }
   }
@@ -735,6 +754,42 @@ export async function getServiceBySlug(slug: string){
 
   const service = data.services.nodes.find((service: any) => service.slug === slug);
   return service;
+}
+
+export async function getServiceByCategory(category: string){
+  let sortedServices: any = [];
+  const data = await fetchAPI(`
+  query services {
+    services {
+      nodes {
+        picture {
+          altText
+          sourceUrl
+        }
+        slug
+        title
+        content
+        id
+        description
+        serviceCategories {
+          nodes {
+            slug
+          }
+        }
+      }
+    }
+  }
+  `)
+  if (category === 'all'){
+    return data.services.nodes
+  }else{
+    data.services.nodes.map((service: any) => {
+      if(service.serviceCategories.nodes[0].slug === category){
+        sortedServices.push(service)
+      }
+    })
+  }
+  return sortedServices
 }
 
 export async function getPageBySlug(slug: string){

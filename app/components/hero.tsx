@@ -61,7 +61,7 @@ export default async function Hero() {
             <HighlightedText
               text={title}
               tag="h1"
-              className="text-5xl font-bold leading-none sm:text-6xl mb-8 overflow-clip relative"
+              className="text-2xl font-bold leading-none sm:text-6xl mb-8 overflow-clip relative md:text-5xl sm:text:3xl"
               color="text-default"
             />
             <HighlightedText

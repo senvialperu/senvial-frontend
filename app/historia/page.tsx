@@ -29,7 +29,7 @@ export default async function Historia() {
     return (
         <main className="flex min-h-screen flex-col mx-auto space-y-6 sm:space-y-12 lg:mt-16 text-center">
             <Image src={featuredImage.sourceUrl} alt={featuredImage.alt} width={1920} height={400} />
-            <div className="max-w-lg mx-auto p-8">
+            <div className="max-w-4xl mx-auto p-8">
                 <h1 className="text-4xl">{data.title}</h1>
                 <div className="text-lg leading-relaxed space-y-4" dangerouslySetInnerHTML={{ __html: justifiedContent }} />
             </div>

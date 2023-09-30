@@ -1,7 +1,5 @@
 import { getProductsByCategory } from "@/app/lib/api";
 import ProductList from "@/app/views/product-list";
-import SortedPosts from "@/app/components/sorted-posts";
-
 
 export default async function PostsByCategory({ params }: { params: { category: string } }) {
     const postsResponse = await getProductsByCategory(params.category);

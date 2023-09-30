@@ -66,7 +66,7 @@ function CategoryLink({ attributes }: CategoryLink) {
     <li className="flex">
       <Link
         href={`/blog/${attributes.slug}`}
-        className="hover:dark:text-primary"
+        className="hover:text-primary"
       >
         {attributes.name}
       </Link>
@@ -78,7 +78,7 @@ function PagesLink(link: PagesLink) {
     <li className="flex">
       <Link
         href={link.url}
-        className="hover:dark:text-primary"
+        className="hover:text-primary"
       >
         {link.text}
       </Link>

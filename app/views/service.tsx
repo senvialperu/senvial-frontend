@@ -1,6 +1,6 @@
 import Image from 'next/image';
 import ContentContainer from '../components/content-component';
-export default function Service({ data }: { data: any }) {
+export default function Service({ data }: { data: any, category: string }) {
     const { title, description, picture } = data;
     return (
         <article className="space-y-8">

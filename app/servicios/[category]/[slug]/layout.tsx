@@ -1,5 +1,5 @@
 import React from "react";
-import { getServices } from "@/app/lib/api";
+import { getServices, getServicesCategories } from "@/app/lib/api";
 
 import ServiceSelect from "@/app/components/service-select";
 
@@ -38,9 +38,12 @@ export default async function LayoutRoute({
     params: {
         service: string;
         slug: string;
+        category: string;
     };
 }) {
     const { services } = (await fetchSideMenuData()) as Data;
+    const categories = await getServicesCategories();
+
     return (
         <section className="container p-8 mx-auto space-y-6 sm:space-y-12 lg:mt-16">
             <div className="grid grid-cols-1 md:grid-cols-3 gap-2 lg:gap-4">
@@ -48,6 +51,7 @@ export default async function LayoutRoute({
                 <aside>
                     <ServiceSelect
                         services={services}
+                        categories={categories.serviceCategories.nodes}
                         params={params}
                     />
                 </aside>

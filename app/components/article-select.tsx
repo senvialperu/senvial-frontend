@@ -27,9 +27,6 @@ export default function ArticleSelect({
     category: string;
   };
 }) {
-  console.log('categories', categories.categories.nodes)
-  console.log('articles', articles)
-  console.log('params', params)
   categories = categories.categories.nodes
   return (
     <div className="p-4 rounded-lg bg-secondary-content min-h-[365px] relative text-white">

@@ -123,7 +123,7 @@ function NavExpandableLink({ url, text, product_categories, services }: any) {
                 ref={parentRef}
                 style={{ position: 'relative', zIndex: 10 }}
               >
-                <Link href={url} className={`flex items-center bg-secondary `}>
+                <Link href={'/servicios'} className={`flex items-center bg-secondary `}>
                   <p className="p-2 w-full text-primary-content">SERVICIOS</p>
                 </Link>
                 {isExpandedServices && (
@@ -193,7 +193,7 @@ function MobileNavExpandableLink({ url, text, product_categories, services, clos
           <ul className="flex flex-col">
             {product_categories.nodes.map((item: any) => (
               <li key={item.name} className="p-2 w-full hover:bg-secondary hover:text-primary-content">
-                <Link href={`/productos/${item.slug}`} className="border-b-2 dark:border-transparent" onClick={handleClickLink}>
+                <Link href={`/productos/${item.slug}`} className="border-b-2 border-transparent" onClick={handleClickLink}>
                   <p className="w-full">{item.name}</p>
                 </Link>
               </li>
@@ -204,7 +204,7 @@ function MobileNavExpandableLink({ url, text, product_categories, services, clos
               </Link>
             ))}
             <li onClick={handleClickServices} className="p-2 hover:text-primary-content w-full cursor-pointer">
-              <div className={`flex items-center mx-4 -mb-1 border-b-2 dark:border-transparent`}>
+              <div className={`flex items-center mx-4 -mb-1 border-b-2 border-transparent`}>
                 <p className="p-2 w-full text-primary-content">SERVICIOS</p>
                 <ChevronDownIcon width={20} height={20} />
               </div>

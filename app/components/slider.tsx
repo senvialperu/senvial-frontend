@@ -57,7 +57,7 @@ export default function Slider({ data }: any) {
                 {slides.map((item: any, index: number) => {
                     return (
                         <SwiperSlide key={index} className="relative">
-                            <div className="absolute inset-0 flex items-center justify-center">
+                            <div className="absolute max-w-xl lg:-top-[15rem] lg:ml-[12rem] inset-0 flex items-center justify-left">
                                 <h1 className="text-white bg-black p-4 text-center bg-opacity-80 text-sm md:text-xl lg:text-2xl 2xl:text-4xl">
                                     {item.text || ''}
                                 </h1>
