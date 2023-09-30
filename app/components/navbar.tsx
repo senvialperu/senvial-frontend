@@ -116,7 +116,7 @@ function NavExpandableLink({ url, text, product_categories, services }: any) {
                 onMouseEnter={handleMouseEnterServices}
                 onMouseLeave={handleMouseLeaveServices}
                 ref={parentRef}
-                style={{ position: 'relative', zIndex: 999 }}
+                style={{ position: 'relative', zIndex: 10 }}
               >
                 <Link href={url} className={`flex items-center bg-secondary `}>
                   <p className="p-2 w-full text-primary-content">SERVICIOS</p>
@@ -325,8 +325,8 @@ export default function Navbar({
           </div>
 
           <Dialog as="div" className="lg:hidden" open={mobileMenuOpen} onClose={setMobileMenuOpen}>
-            <div className="fixed inset-0 z-50" />
-            <Dialog.Panel className="fixed bg-base-100 inset-y-0 rtl:left-0 ltr:right-0 z-50 w-full overflow-y-auto bg-default px-6 py-6 sm:max-w-sm sm:ring-1 sm:ring-gray-100/10">
+            <div className="fixed inset-0 z-10" />
+            <Dialog.Panel className="fixed bg-base-100 inset-y-0 rtl:left-0 ltr:right-0 z-10 w-full overflow-y-auto bg-default px-6 py-6 sm:max-w-sm sm:ring-1 sm:ring-gray-100/10">
               <div className="flex items-center justify-between ">
                 <a href="#" className="-m-1.5 p-1.5">
                   <span className="sr-only">Senvial</span>
