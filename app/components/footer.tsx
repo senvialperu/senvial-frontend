@@ -5,6 +5,8 @@ import Logo from "./logo";
 import { CgWebsite } from "react-icons/cg";
 import { AiFillFacebook, AiFillLinkedin, AiFillTwitterCircle, AiFillYoutube, AiFillPhone, AiFillMail, AiFillHome } from "react-icons/ai";
 
+import { MapPinIcon } from '@heroicons/react/24/outline'
+
 interface FooterLink {
   id: number;
   url: string;
@@ -120,6 +122,7 @@ export default function Footer({
   logoText,
   menuLinks,
   categoryLinks,
+  location,
   pagesLinks,
   contactLinks,
   socialLinks,
@@ -128,6 +131,7 @@ export default function Footer({
   logoText: any;
   menuLinks: any;
   categoryLinks: any;
+  location: any;
   pagesLinks: any;
   contactLinks: any;
   socialLinks: any;
@@ -180,6 +184,18 @@ export default function Footer({
                 <FooterContact key={index} {...link} />
               ))}
             </ul>
+          </div>
+
+          <div className="col-span-6 text-left md:text-left space-y-2 xl:col-span-3">
+            <div className="flex flex-row space-x-5 align-middle">
+              <div className="mt-3">
+                <MapPinIcon className="h-8 w-8 text-default" aria-hidden="true" />
+              </div>
+              <div
+                className="text-lg leading-relaxed mb-4"
+                dangerouslySetInnerHTML={{ __html: location }}
+              />
+            </div>
           </div>
 
         </div>

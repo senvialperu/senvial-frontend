@@ -64,7 +64,7 @@ export default async function RootLayout({ children, }: { children: React.ReactN
           {children}
         </main>
 
-        <Footer logoUrl={footerLogo.mediaItemUrl} menuLinks={footerRouteLinks} pagesLinks={footerMenuLinks} socialLinks={footerSocialLinks} categoryLinks={footerLinks} logoText="Senvial" contactLinks={footerContactLinks} />
+        <Footer logoUrl={footerLogo.mediaItemUrl} menuLinks={footerRouteLinks} pagesLinks={footerMenuLinks} socialLinks={footerSocialLinks} categoryLinks={footerLinks} logoText="Senvial" contactLinks={footerContactLinks} location={location} />
       </body>
     </html>
   )
