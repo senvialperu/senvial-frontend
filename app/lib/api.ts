@@ -295,7 +295,7 @@ export async function getNavbar(){
                 slug
               }
             }
-            services {
+            serviceCategories {
               nodes {
                 slug
                 title

@@ -56,14 +56,6 @@ export default function Post({ data }: any) {
             )}
             <div className="space-y-6">
                 <h1 className="leading-tight text-5xl font-bold text-primary-content">{title}</h1>
-                <div className="flex flex-col max-w-2xl items-start justify-between w-full md:flex-row md:items-center dark:text-gray-400">
-                    <div className="flex items-center md:space-x-2">
-                        <div
-                            className="text-lg leading-relaxed mb-4"
-                            dangerouslySetInnerHTML={{ __html: justifiedExcerpt }}
-                        />
-                    </div>
-                </div>
                 <div className='max-w-2xl'>
                     <div
                         className="text-lg leading-relaxed mb-4"

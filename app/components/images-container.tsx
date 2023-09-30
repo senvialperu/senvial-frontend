@@ -45,7 +45,7 @@ const ImageGallery = ({ data }: any) => {
     return (
         <div className='flex flex-col lg:flex-row '>
             <div className='flex space-y-10 flex-row gap-4 lg:gap-0 lg:flex-col m-auto'>
-                {images.map((image: any) => (
+                {images.map((image: any, index: number) => (
                     <motion.button
                         key={image.id}
                         whileHover={{ scale: 1.1 }}
@@ -61,7 +61,7 @@ const ImageGallery = ({ data }: any) => {
                             onClick={() => handleImageClick(image.id)}
                             width={100}
                             height={80}
-                            className='m-0 object-cover rounded-lg transition-opacity duration-300'
+                            className={`m-0 object-cover rounded-lg transition-opacity duration-300 ${index === 0 ? 'mt-10' : ''}`}
                         />
                     </motion.button>
                 ))}

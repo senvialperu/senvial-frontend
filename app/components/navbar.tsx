@@ -49,7 +49,7 @@ interface NavExpandableLink extends NavLink {
     nodes: any;
     data: any; // Aquí incluimos la estructura de ProductCategory
   };
-  services: {
+  serviceCategories: {
     nodes: any;
     data: any; // Aquí incluimos la estructura de ProductCategory
   }
@@ -75,7 +75,7 @@ function NavLink({ url, text }: NavLink) {
     </li>
   );
 }
-function NavExpandableLink({ url, text, product_categories, services }: any) {
+function NavExpandableLink({ url, text, product_categories, serviceCategories }: any) {
   const parentRef = useRef<HTMLDivElement>(null);
   useEffect(() => {
     if (parentRef.current) {
@@ -129,7 +129,7 @@ function NavExpandableLink({ url, text, product_categories, services }: any) {
                 {isExpandedServices && (
                   <div className="absolute left-0 bg-transparent z-10" style={{ top: '0', marginLeft: '100%' }}>
                     <ul className="flex flex-col gap-[2px]">
-                      {services.nodes.map((item: any) => (
+                      {serviceCategories.nodes.map((item: any) => (
                         <li key={item.title} className="p-2 bg-black hover:bg-secondary hover:text-primary-content w-full">
                           <Link href={`/servicios/${item.slug}`} className={``}>
                             <p className="w-48">{item.title}</p>
@@ -164,7 +164,7 @@ function MobileNavLink({ url, text, closeMenu }: MobileNavLink) {
     </a>
   );
 }
-function MobileNavExpandableLink({ url, text, product_categories, services, closeMenu }: MobileExpandableNavLink) {
+function MobileNavExpandableLink({ url, text, product_categories, serviceCategories, closeMenu }: MobileExpandableNavLink) {
   const [isExpanded, setIsExpanded] = useState(false);
   const [isExpandedServices, setIsExpandedServices] = useState(false);
 
@@ -211,7 +211,7 @@ function MobileNavExpandableLink({ url, text, product_categories, services, clos
               {isExpandedServices && (
                 <div className="relative w-full bg-transparent z-10" style={{ top: '100%' }}>
                   <ul className="flex flex-col">
-                    {services.nodes.map((item: any, index: number) => (
+                    {serviceCategories.nodes.map((item: any, index: number) => (
                       <li key={index} className="m-2 ml-10 hover:bg-secondary hover:text-primary-content w-full">
                         <Link href={`/servicios/${item.slug}`} className={`border-b-2 dark:border-transparent`} onClick={handleClickLink}>
                           <p className="w-full">{item.title}</p>
@@ -300,7 +300,7 @@ export default function Navbar({
 
   return (
     <>
-      <div className={`p-4 text-default bg-default bg-base-100 justify-between relative w-full`}>
+      <div className={`p-4 sticky top-0 text-default bg-default bg-base-100 justify-between z-10 mt-0 lg:relative w-full`}>
         <div className="flex justify-between h-24 mx-auto px-0 sm:px-6 w-[80%]">
           <Logo src={logoUrl}>
           </Logo>
@@ -341,7 +341,7 @@ export default function Navbar({
           </div>
 
           <Dialog as="div" className="lg:hidden" open={mobileMenuOpen} onClose={setMobileMenuOpen}>
-            <div className="fixed inset-0 z-10" />
+            <div className="fixed  inset-0 z-10" />
             <Dialog.Panel className="fixed bg-base-100 inset-y-0 rtl:left-0 ltr:right-0 z-10 w-full overflow-y-auto bg-default px-6 py-6 sm:max-w-sm sm:ring-1 sm:ring-gray-100/10">
               <div className="flex items-center justify-between ">
                 <a href="#" className="-m-1.5 p-1.5">
@@ -373,7 +373,7 @@ export default function Navbar({
                         closeMenu={closeMenu} />
                     ))}
                     {acordeonLinks.map((link: any, index: number) => (
-                      <MobileNavExpandableLink key={link.id} product_categories={acordeonLinks[0].productCategories} services={acordeonLinks[0].services} url="/" newTab={false} text="PRODUCTOS Y SERVICIOS" id={index} closeMenu={closeMenu} />
+                      <MobileNavExpandableLink key={link.id} product_categories={acordeonLinks[0].productCategories} serviceCategories={acordeonLinks[0].serviceCategories} url="/" newTab={false} text="PRODUCTOS Y SERVICIOS" id={index} closeMenu={closeMenu} />
                     ))}
                     {links.slice(linksMiddle).map((item: any, index: number) => (
                       <MobileNavLink key={item.id}
@@ -408,7 +408,7 @@ export default function Navbar({
             {acordeonLinks.map((link: any, index: number) => (
               <span className={`w-auto`}
                 key={index}>
-                <NavExpandableLink key={link.id} product_categories={acordeonLinks[0].productCategories} services={acordeonLinks[0].services} url="/" newTab={false} text="PRODUCTOS Y SERVICIOS" id={index} />
+                <NavExpandableLink key={link.id} product_categories={acordeonLinks[0].productCategories} serviceCategories={acordeonLinks[0].serviceCategories} url="/productos" newTab={false} text="PRODUCTOS Y SERVICIOS" id={index} />
               </span>
             ))}
             {sortedNavLinks.slice(linksMiddle).map((item: any, index: number) => (
