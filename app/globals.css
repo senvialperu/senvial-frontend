@@ -41,3 +41,6 @@
           gap: 10px; /* Espacio entre las imágenes */
       }
   }
+.opacity-transition {
+  @apply transition-opacity ease-in-out duration-1000; /* Configura la transición de opacidad */
+}

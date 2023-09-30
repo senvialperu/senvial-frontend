@@ -639,6 +639,16 @@ export async function getProductBySlug(slug: string){
               slug
             }
           }
+          contentContainer {
+            nodes {
+              images {
+                altText
+                sourceUrl
+                id
+              }
+              text
+            }
+          }
         }
       }
     }
@@ -650,7 +660,6 @@ export async function getProductBySlug(slug: string){
       dataSorted.push(product)
     }
   });
-  console.log('sorted slug product', dataSorted)
   return dataSorted
 }
 

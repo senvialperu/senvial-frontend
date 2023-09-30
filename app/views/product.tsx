@@ -1,31 +1,9 @@
 'use client'
-import React, { useEffect, useState } from 'react';
-import cheerio from 'cheerio';
 import Image from 'next/image';
-
-function justifyH2Text(content) {
-    const $ = cheerio.load(content);
-
-    // Selecciona todas las etiquetas <h2>, <h1>, <h3>, <p>, <h4> dentro del contenido HTML y aplica estilos CSS.
-    $('h2, h1, h3, p, h4').css('text-align', 'justify');
-
-    const imgDiv = $('<div class="grid-container"></div>').css({
-        display: 'grid',
-        justifyContent: 'center', // Puedes ajustar la alineación según tus necesidades
-        alignItems: 'center',    // Puedes ajustar la alineación según tus necesidades
-        margin: '0 auto',
-    });
-
-    $('img').wrapAll(imgDiv);
-    return $.html();
-}
-
+import ContentContainer from '../components/content-component';
 
 export default function Product({ data }: { data: any }) {
-    const { title, description, picture, content } = data[0].node;
-
-    // Justifica el contenido HTML antes de usarlo
-    const justifiedContent = justifyH2Text(content);
+    const { title, picture } = data[0].node;
 
     return (
         <article className="space-y-8">
@@ -43,11 +21,7 @@ export default function Product({ data }: { data: any }) {
                 <div className="flex flex-col items-start justify-between w-full md:flex-row md:items-center dark:text-gray-400">
                 </div>
             </div>
-
-            <div className="leading-relaxed mb-4">
-                <div dangerouslySetInnerHTML={{ __html: justifiedContent }} />
-            </div>
-
+            <ContentContainer data={data[0].node.contentContainer.nodes[0]}></ContentContainer>
         </article>
     );
 }
