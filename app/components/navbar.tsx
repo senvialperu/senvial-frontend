@@ -263,7 +263,7 @@ export default function Navbar({
   const linksSize = links.length;
   let linksMiddle: number;
   if (Math.floor(linksSize / 2) % 2 === 0) {
-    linksMiddle = Math.floor(linksSize / 2) + 1;
+    linksMiddle = Math.floor(linksSize / 2);
   } else {
     linksMiddle = Math.floor(linksSize / 2);
   }
@@ -284,6 +284,12 @@ export default function Navbar({
     };
   }, [isSticky]);
 
+
+
+  const sortedNavLinks = links.sort((a, b) => {
+    return a.order - b.order;
+  });
+
   return (
     <>
       <div className={`p-4 text-default bg-default bg-base-100 justify-between relative w-full`}>
@@ -291,13 +297,16 @@ export default function Navbar({
           <Logo src={logoUrl}>
           </Logo>
 
-          <div className="flex space-x-2">
-            <div className="xl:grid grid-flow-col auto-cols-max justify content-center items-center gap-2 hidden">
-              <div className="align-middle">
+          <div className="flex space-x-8">
+            <div className="xl:grid grid-flow-col auto-cols-max justify-center items-center gap-2 hidden">
+              <div className="align-middle mb-4">
                 <MapPinIcon className="h-8 w-8 text-default" aria-hidden="true" />
               </div>
-              <div>
-                <p className="max-w-xs">{locationText}</p>
+              <div className="flex flex-col justify-center items-center">
+                <div
+                  className="text-lg leading-relaxed mb-4"
+                  dangerouslySetInnerHTML={{ __html: locationText }}
+                />
               </div>
             </div>
             <div className="grid gap-2">
@@ -316,11 +325,10 @@ export default function Navbar({
                     </a>
                   ))}
                 </div>
+                <button className="btn btn-xs sm:btn-sm md:btn-md lg:btn-md btn-active hidden md:block mb-2">
+                  {whatsappLink && <Link href={whatsappLink}>Whatsapp</Link>}
+                </button>
               </div>
-              <button className="btn btn-xs sm:btn-sm md:btn-md lg:btn-md btn-active hidden md:block">
-                {whatsappLink && <Link href={whatsappLink}>Whatsapp</Link>}
-              </button>
-
             </div>
           </div>
 
@@ -381,7 +389,7 @@ export default function Navbar({
       <div className={`lg:flex hidden align-middle items-center justify-center text-default w-[80%] mx-auto text-base-100 sticky ${isSticky ? 'top-0 w-full ' : 'bottom-10'} z-10`} style={{ marginBottom: "-50px", width: '100%' }}>
         <div className={`bg-primary-content w-full p-10 ${isSticky ? 'py-6 ' : ''}`} style={{ width: isSticky ? '100%' : '80%' }}>
           <ul className="flex justify-center divide-x divide-slate-500">
-            {links.slice(0, linksMiddle).map((item: any, index: number) => (
+            {sortedNavLinks.slice(0, linksMiddle).map((item: any, index: number) => (
               <span
                 className={`w-auto`}
                 key={index}
@@ -395,7 +403,7 @@ export default function Navbar({
                 <NavExpandableLink key={link.id} product_categories={acordeonLinks[0].productCategories} services={acordeonLinks[0].services} url="/" newTab={false} text="PRODUCTOS Y SERVICIOS" id={index} />
               </span>
             ))}
-            {links.slice(linksMiddle).map((item: any, index: number) => (
+            {sortedNavLinks.slice(linksMiddle).map((item: any, index: number) => (
               <span
                 className={`w-auto`}
                 key={index}

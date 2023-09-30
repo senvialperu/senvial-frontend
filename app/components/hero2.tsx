@@ -4,6 +4,9 @@ import HighlightedText from "./highlighted-text";
 import { renderButtonStyle } from "../utils/render-button-style";
 import { getHero } from "../lib/api";
 
+// boton
+import Button from "./button";
+
 interface Button {
     id: string;
     url: string;
@@ -60,14 +63,15 @@ export default async function HeroLeft() {
                     />
                     <div className="flex flex-col space-y-4 sm:items-center h-auto sm:justify-center sm:flex-row sm:space-y-0 sm:space-x-4 lg:justify-start">
                         {buttons.map((button: any, index: number) => (
-                            <Link
-                                key={index}
-                                href={button.url}
-                                target={button.newTab ? "_blank" : "_self"}
-                                className={renderButtonStyle(button.type)}
-                            >
-                                {button.text}
-                            </Link>
+                            <Button key={index} className={renderButtonStyle("primary")}>
+                                <Link
+                                    key={index}
+                                    href={button.url}
+                                    target={button.newTab ? "_blank" : "_self"}
+                                >
+                                    {button.text}
+                                </Link>
+                            </Button>
                         ))}
                     </div>
                 </div>

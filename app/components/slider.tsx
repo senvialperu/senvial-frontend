@@ -36,8 +36,7 @@ export default function Slider({ data }: any) {
     const swiperElRef = useRef<HTMLDivElement>(null);
 
     // Extrae la lista de imágenes de los datos
-    const images = data.sliders.nodes[0].picture;
-
+    const slides = data.sliders.nodes[0].slides.nodes
     return (
         <>
             <Swiper
@@ -55,18 +54,25 @@ export default function Slider({ data }: any) {
                 className="mySwiper h-auto w-full"
             >
 
-                {images.map((item: any, index: number) => {
+                {slides.map((item: any, index: number) => {
                     return (
-                        <SwiperSlide key={index}>
+                        <SwiperSlide key={index} className="relative">
+                            <div className="absolute inset-0 flex items-center justify-center">
+                                <h1 className="text-white bg-black p-4 text-center bg-opacity-80 text-4xl">
+                                    {item.text || ''}
+                                </h1>
+                            </div>
                             <Image
-                                src={item.mediaItemUrl || ''}
-                                alt={item.altText || ''} // Usar una cadena vacía en caso de que sea null
+                                src={item.image.sourceUrl || ''}
+                                alt={item.image.sourceUrl || ''}
                                 width={1920}
                                 height={1080}
                             />
                         </SwiperSlide>
                     )
                 })}
+
+
             </Swiper>
         </>
     )

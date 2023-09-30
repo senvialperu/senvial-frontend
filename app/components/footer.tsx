@@ -131,10 +131,21 @@ export default function Footer({
   contactLinks: any;
   socialLinks: any;
 }) {
+  const sortedContactLinks = contactLinks.sort((a, b) => {
+    // Define un orden personalizado para los tipos de enlaces.
+    const order = ["phone", "email", "address"];
+
+    const indexA = order.indexOf(a.contactType[0]);
+    const indexB = order.indexOf(b.contactType[0]);
+
+    // Ordena los enlaces en función de su posición en el arreglo "order".
+    return indexA - indexB;
+  });
+
   return (
-    <footer className="py-6 bg-primary-content dark:text-gray-50">
+    <footer className="py-6 bg-primary-content text-gray-50">
       <div className="container px-6 mx-auto space-y-6 divide-y md:space-y-12 divide-opacity-50">
-        <div className="grid grid-cols-12 gap-4">
+        <div className="grid grid-cols-12 gap-8">
           <div className="pb-6 col-span-full md:pb-0 md:col-span-5">
             <Logo src={logoUrl}>
               {logoText && <h2 className="text-2xl font-bold"></h2>}
@@ -161,10 +172,10 @@ export default function Footer({
             </ul>
           </div>
 
-          <div className="col-span-6 text-left md:text-left md:col-span-2">
-            <p className="pb-1 text-lg font-medium">CONTACTO</p>
-            <ul className="align-middle">
-              {contactLinks.map((link: any, index: number) => (
+          <div className="col-span-6 text-left md:text-left space-y-2 xl:col-span-3">
+            <p className="pb-text-lg font-medium">CONTACTO</p>
+            <ul className="align-middle space-y-2">
+              {sortedContactLinks.map((link: any, index: number) => (
                 <FooterContact key={index} {...link} />
               ))}
             </ul>

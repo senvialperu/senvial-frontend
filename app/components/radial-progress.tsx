@@ -4,10 +4,8 @@ import 'react-circular-progressbar/dist/styles.css';
 
 export default function RadialProgresses({ radialProgresses }: any) {
     const featuredImageUrl = radialProgresses.radialProgresses.nodes[0].featuredImage.node.mediaItemUrl;
-    const columnCount = Math.min(4, radialProgresses.radialProgresses.nodes[0].radials.nodes.length); // Calcula el número de columnas máximo como 4 o la longitud de datos si es menor
     const radials = radialProgresses.radialProgresses.nodes[0].radials.nodes;
     const title = radialProgresses.radialProgresses.nodes[0].title;
-    const description = radialProgresses.radialProgresses.nodes[0].description;
 
     return (
         <div className="relative">

@@ -259,6 +259,7 @@ export async function getNavbar(){
             newTab
             text
             url
+            order
           }
         }
         navbarLogo {
@@ -408,10 +409,14 @@ export async function getSlider(){
   query sliders {
     sliders {
       nodes {
-        picture {
-          mediaItemUrl
-          sizes
-          altText
+        slides {
+          nodes {
+            image {
+              altText
+              sourceUrl
+            }
+            text
+          }
         }
       }
     }

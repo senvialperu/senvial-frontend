@@ -26,13 +26,11 @@ interface feature {
 }
 
 export default function IconTextDivs({ data: { iconTextDivs } }: any) {
-    const cols = Math.min(4, iconTextDivs.length);
     return (
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 items-center justify-center">
+        <div className={`grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 items-center justify-center gap-2`}>
             {iconTextDivs.nodes.map((iconText: any, index: number) => (
                 <div
-                    className={`flex flex-col h-auto min-h-full items-center br-10 bg-neutral-content p-5 py-10 lg:p-10 text-left${index < iconTextDivs.nodes - 1 && 'border-neutral-content'
-                        } ${index % cols === cols - 1 && 'lg:border-r-2'}`}
+                    className={`flex flex-col h-auto min-h-full items-center br-10 bg-neutral-content p-5 py-10 lg:p-10 text-left`}
                     key={index}
                 >
                     <RenderIcons type={iconText.icon[0]} />

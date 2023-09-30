@@ -46,8 +46,8 @@ export default async function RootLayout({ children, }: { children: React.ReactN
   const acordeonLinks = navbar.navbars.nodes[0].acordeonLinks.nodes;
 
   const footerLogo = footer.footers.nodes[0].footerLogo;
-  const footerLinks = footer.footers.nodes[0].links.nodes;
-  const footerMenuLinks = footer.footers.nodes[0].menuLinks.nodes;
+  const footerLinks = footer.footers.nodes[0].menuLinks.nodes;
+  const footerMenuLinks = footer.footers.nodes[0].links.nodes;
   const footerLocation = footer.footers.nodes[0].location;
   const footerRouteLinks = footer.footers.nodes[0].routeLinks.nodes;
   const footerSocialLinks = footer.footers.nodes[0].socialLInks.nodes;
@@ -64,7 +64,7 @@ export default async function RootLayout({ children, }: { children: React.ReactN
           {children}
         </main>
 
-        <Footer logoUrl={footerLogo.mediaItemUrl} menuLinks={footerMenuLinks} pagesLinks={footerRouteLinks} socialLinks={footerSocialLinks} categoryLinks={footerLinks} logoText="Senvial" contactLinks={footerContactLinks} />
+        <Footer logoUrl={footerLogo.mediaItemUrl} menuLinks={footerRouteLinks} pagesLinks={footerMenuLinks} socialLinks={footerSocialLinks} categoryLinks={footerLinks} logoText="Senvial" contactLinks={footerContactLinks} />
       </body>
     </html>
   )
