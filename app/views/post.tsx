@@ -16,9 +16,30 @@ export default function Post({ data }: any) {
         $('h1').each((index, element) => {
             $(element).attr('style', 'margin-top: 2rem; margin-bottom: 1rem; font-size: 2rem; font-weight: 700; line-height: 1.2; text-align: center;');
         });
+        $('h2').each((index, element) => {
+            $(element).attr('style', 'margin-top: 2rem; margin-bottom: 1rem; font-size: 1.5rem; line-height: 1.2; text-align: left;');
+        });
 
         return $.html();
     }
+
+    function justifyExcerpt(excerpt) {
+        const $ = cheerio.load(excerpt);
+
+        $('p').each((index, element) => {
+            $(element).attr('style', 'text-align: justify;');
+        });
+        $('h1').each((index, element) => {
+            $(element).attr('style', 'margin-top: 2rem; margin-bottom: 1rem; font-size: 2rem; font-weight: 700; line-height: 1.2; text-align: center;');
+        });
+        $('h2').each((index, element) => {
+            $(element).attr('style', 'margin-top: 2rem; margin-bottom: 1rem; font-size: 2rem; font-weight: 700; line-height: 1.2; text-align: center;');
+        });
+
+        return $.html();
+    }
+
+    const justifiedExcerpt = justifyExcerpt(excerpt);
 
     const justifiedContent = justifyParagraphs(content);
 
@@ -35,11 +56,11 @@ export default function Post({ data }: any) {
             )}
             <div className="space-y-6">
                 <h1 className="leading-tight text-5xl font-bold text-primary-content">{title}</h1>
-                <div className="flex flex-col items-start justify-between w-full md:flex-row md:items-center dark:text-gray-400">
+                <div className="flex flex-col max-w-2xl items-start justify-between w-full md:flex-row md:items-center dark:text-gray-400">
                     <div className="flex items-center md:space-x-2">
                         <div
                             className="text-lg leading-relaxed mb-4"
-                            dangerouslySetInnerHTML={{ __html: excerpt }}
+                            dangerouslySetInnerHTML={{ __html: justifiedExcerpt }}
                         />
                     </div>
                 </div>
