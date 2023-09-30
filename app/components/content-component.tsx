@@ -5,7 +5,6 @@ const ContentContainer = (dataContainer: any) => {
     const images = dataContainer;
     const content = dataContainer.data.text
 
-
     const justifiedContent = justifyH2Text(content);
 
     function justifyH2Text(content) {

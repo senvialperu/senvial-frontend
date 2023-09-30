@@ -3,6 +3,7 @@
 import { FC } from 'react';
 import { useForm } from 'react-hook-form';
 import { sendEmail } from '@/app/utils/send-email';
+import { useState } from 'react';
 
 export type FormData = {
     name: string;
@@ -17,6 +18,42 @@ const Contact: FC = () => {
     function onSubmit(data: FormData) {
         sendEmail(data);
     }
+
+    const [phoneNumber, setPhoneNumber] = useState('');
+    const [error, setError] = useState('');
+
+    const handlePhoneNumberChange = (e) => {
+        const inputValue = e.target.value;
+        setPhoneNumber(inputValue);
+
+        const regex = /^[0-9]+$/;
+
+
+        if (!regex.test(inputValue)) {
+            setError('Por favor, ingresa un número de teléfono válido.');
+        } else {
+            setError('');
+        }
+    };
+
+
+    // handler for mail 
+    const [email, setEmail] = useState('');
+    const [emailError, setEmailError] = useState('');
+
+    const handleEmailChange = (e) => {
+        const inputValue = e.target.value;
+        setEmail(inputValue);
+
+        // Expresión regular para validar una dirección de correo electrónico
+        const emailRegex = /^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/;
+
+        if (!emailRegex.test(inputValue)) {
+            setEmailError('Por favor, ingresa una dirección de correo electrónico válida.');
+        } else {
+            setEmailError('');
+        }
+    };
 
     return (
         <form onSubmit={handleSubmit(onSubmit)}>
@@ -43,10 +80,15 @@ const Contact: FC = () => {
                 </label>
                 <input
                     type='email'
+                    id='email'
                     placeholder='example@domain.com'
                     className='w-full rounded-md border border-gray-300 bg-white py-3 px-6 text-base font-medium text-gray-700 outline-none focus:border-secondary focus:shadow-md'
-                    {...register('email', { pattern: /[A-Za-z]{3}/, required: true })}
+                    value={email}
+                    onChange={handleEmailChange}
                 />
+                {emailError && (
+                    <span className="text-red-600">{emailError}</span>
+                )}
             </div>
             <div className='mb-5'>
                 <label
@@ -56,11 +98,16 @@ const Contact: FC = () => {
                     Número de teléfono
                 </label>
                 <input
-                    type='cel'
+                    type='text'
+                    id='cel'
                     placeholder='+51 999 999 999'
                     className='w-full rounded-md border border-gray-300 bg-white py-3 px-6 text-base font-medium text-gray-700 outline-none focus:border-secondary focus:shadow-md'
-                    {...register('cel', { required: true })}
+                    value={phoneNumber}
+                    onChange={handlePhoneNumberChange}
                 />
+                {error && (
+                    <span className="text-red-600">{error}</span>
+                )}
             </div>
             <div className='mb-5'>
                 <label

@@ -20,7 +20,7 @@ export default function ProductList({
                         <Link
                             href={`/productos/${category?.slug}/${product.node.slug}`}
                             key={product.id}
-                            className="max-w-sm mx-auto group hover:no-underline focus:no-underline bg-primary-content lg:w-[300px] xl:min-w-[375px] rounded-2xl overflow-hidden shadow-lg hover:-translate-y-5 hover:shadow-2xl transform transition-all duration-500 ease-in-out"
+                            className="w-full mx-auto group hover:no-underline focus:no-underline bg-primary-content lg:w-[300px] xl:min-w-[375px] rounded-2xl overflow-hidden shadow-lg  hover:-translate-y-5 hover:shadow-2xl transform transition-all duration-500 ease-in-out"
                         >
                             {imageUrl && (
                                 <Image
@@ -31,9 +31,10 @@ export default function ProductList({
                                     src={imageUrl}
                                 />
                             )}
-                            <div className="p-6 space-y-2 relative">
 
-                                <h3 className="text-2xl font-semibold group-hover:underline group-focus:underline">
+
+                            <div className='p-6 space-y-2 relative'>
+                                <h3 className="text-2xl font-semibold group-hover:underline group-focus:underline ">
                                     {product.node.title}
                                 </h3>
                                 <p className="py-4">{product.node.description}</p>

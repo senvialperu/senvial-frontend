@@ -12,8 +12,6 @@ export default function HeroPost({
   slug,
   category,
 }) {
-  console.log('cover Image', coverImage)
-
   return (
     <section>
       <div className="mb-8 md:mb-16">

@@ -43,7 +43,7 @@ export default function Slider({ data }: any) {
                 spaceBetween={30}
                 centeredSlides={true}
                 autoplay={{
-                    delay: 2500,
+                    delay: 5000,
                     disableOnInteraction: false,
                 }}
                 pagination={{
@@ -58,7 +58,7 @@ export default function Slider({ data }: any) {
                     return (
                         <SwiperSlide key={index} className="relative">
                             <div className="absolute inset-0 flex items-center justify-center">
-                                <h1 className="text-white bg-black p-4 text-center bg-opacity-80 text-4xl">
+                                <h1 className="text-white bg-black p-4 text-center bg-opacity-80 text-sm md:text-xl lg:text-2xl 2xl:text-4xl">
                                     {item.text || ''}
                                 </h1>
                             </div>

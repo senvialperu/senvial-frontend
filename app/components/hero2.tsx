@@ -47,12 +47,12 @@ export default async function HeroLeft() {
     return (
 
         <section className="bg-primary-content text-base-100 items-center justify-end flex" style={{ background: `url(${imgUrl})`, backgroundSize: 'cover' }}>
-            <div className="items-center p-6 sm:py-12 lg:py-24 md:w-[40%] h-auto md:mx-20  w-full">
-                <div className=" lg:ml-auto p-10 text-center rounded-lg  lg:text-left bg-primary-content h-auto">
+            <div className="items-center p-6 sm:py-12 lg:py-24 xl:w-[40%] ">
+                <div className=" lg:ml-auto p-10 text-center rounded-lg  lg:text-left bg-primary-content h-auto min-w-fit ">
                     <HighlightedText
                         text={title}
                         tag="h1"
-                        className="md:text-5xl font-bold leading-none text-3xl l mb-8 h-auto overflow-clip relative"
+                        className="md:text-5xl font-bold leading-none text-3xl l mb-8 h-auto relative"
                         color="text-default"
                     />
                     <HighlightedText

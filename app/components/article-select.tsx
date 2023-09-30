@@ -34,7 +34,6 @@ export default function ArticleSelect({
       <div>
         <div className="flex flex-wrap gap-2 py-6">
           {categories.map((category: any, index: number) => {
-            console.log('current and selected', category.slug, params.category)
             if (categories === 0) return null;
             return (
               <Link

@@ -649,6 +649,7 @@ export async function getProductBySlug(slug: string){
             images {
               altText
               sourceUrl
+              id
             }
             text
           }
@@ -664,7 +665,6 @@ export async function getProductBySlug(slug: string){
       dataSorted.push(product)
     }
   });
-  console.log('sorted slug product', dataSorted)
   return dataSorted
 }
 

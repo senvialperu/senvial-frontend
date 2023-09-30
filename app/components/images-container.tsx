@@ -8,7 +8,6 @@ const ImageGallery = ({ data }: any) => {
     const [selectedImageId, setSelectedImageId] = useState(images[0].id);
 
     const handleImageClick = (id: any) => {
-        console.log(id);
         setSelectedImageId(id);
     };
 
@@ -16,12 +15,10 @@ const ImageGallery = ({ data }: any) => {
 
     const handleImageForModalClick = () => {
         setIsModalOpen(true);
-        console.log('open modal')
     }
 
     const closeImageModal = () => {
         setIsModalOpen(false);
-        console.log('close modal')
     };
 
     const handleKeyPressed = (e: any) => {

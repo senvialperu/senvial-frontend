@@ -6,13 +6,10 @@ import Link from 'next/link'
 export default function PostPreview({
   title,
   coverImage,
-  date,
   excerpt,
-  author,
   slug,
   category,
 }: any) {
-  console.log('category', category)
   return (
     <div>
       <div className="mb-5">

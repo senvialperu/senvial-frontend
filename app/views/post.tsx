@@ -1,12 +1,26 @@
 import Image from 'next/image';
-import { formatDate } from '@/app/utils/helpers';
+import cheerio from 'cheerio';
 
 export default function Post({ data }: any) {
-    console.log('Post', data)
     const { title, slug, content, featuredImage, categories, excerpt } = data[0];
 
 
     const imageUrl = data.featuredImage?.node?.mediaItemUrl
+
+    function justifyParagraphs(content) {
+        const $ = cheerio.load(content);
+
+        $('p').each((index, element) => {
+            $(element).attr('style', 'text-align: justify;');
+        });
+        $('h1').each((index, element) => {
+            $(element).attr('style', 'margin-top: 2rem; margin-bottom: 1rem; font-size: 2rem; font-weight: 700; line-height: 1.2; text-align: center;');
+        });
+
+        return $.html();
+    }
+
+    const justifiedContent = justifyParagraphs(content);
 
     return (
         <article className="space-y-8">
@@ -29,10 +43,10 @@ export default function Post({ data }: any) {
                         />
                     </div>
                 </div>
-                <div>
+                <div className='max-w-2xl'>
                     <div
                         className="text-lg leading-relaxed mb-4"
-                        dangerouslySetInnerHTML={{ __html: content }}
+                        dangerouslySetInnerHTML={{ __html: justifiedContent }}
                     />
                 </div>
             </div>
