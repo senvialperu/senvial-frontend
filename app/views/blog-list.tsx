@@ -10,6 +10,8 @@ export default function PostList({
     children?: React.ReactNode;
 }) {
 
+    console.log('articles', articles)
+
     const category = articles[0].categories.nodes[0].slug
     return (
         <section className="container p-6 mx-auto space-y-6 sm:space-y-12">

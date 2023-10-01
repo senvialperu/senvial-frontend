@@ -9,23 +9,12 @@ import { GetStaticProps } from 'next'
 export default async function Blog() {
   const allPosts = await getAllPostsForHome(false)
 
-  const heroPost = allPosts.edges[0]?.node
-  const morePosts = allPosts.edges.slice(1)
+
+  const morePosts = allPosts.edges
 
   return (
     <Container>
       <Intro />
-      {heroPost && (
-        <HeroPost
-          title={heroPost.title}
-          coverImage={heroPost.featuredImage}
-          date={heroPost.date}
-          author={heroPost.author}
-          slug={heroPost.slug}
-          excerpt={heroPost.excerpt}
-          category={heroPost.categories.nodes[0]}
-        />
-      )}
       {morePosts.length > 0 && <MoreStories posts={morePosts} />}
     </Container>
   )

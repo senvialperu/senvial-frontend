@@ -23,24 +23,6 @@ export default function Post({ data }: any) {
         return $.html();
     }
 
-    function justifyExcerpt(excerpt) {
-        const $ = cheerio.load(excerpt);
-
-        $('p').each((index, element) => {
-            $(element).attr('style', 'text-align: justify;');
-        });
-        $('h1').each((index, element) => {
-            $(element).attr('style', 'margin-top: 2rem; margin-bottom: 1rem; font-size: 2rem; font-weight: 700; line-height: 1.2; text-align: center;');
-        });
-        $('h2').each((index, element) => {
-            $(element).attr('style', 'margin-top: 2rem; margin-bottom: 1rem; font-size: 2rem; font-weight: 700; line-height: 1.2; text-align: center;');
-        });
-
-        return $.html();
-    }
-
-    const justifiedExcerpt = justifyExcerpt(excerpt);
-
     const justifiedContent = justifyParagraphs(content);
 
     return (
@@ -54,9 +36,9 @@ export default function Post({ data }: any) {
                     className="w-full h-96 object-cover rounded-lg"
                 />
             )}
-            <div className="space-y-6">
+            <div className="space-y-6 max-w-3xl">
                 <h1 className="leading-tight text-5xl font-bold text-primary-content">{title}</h1>
-                <div className='max-w-2xl'>
+                <div className=''>
                     <div
                         className="text-lg leading-relaxed mb-4"
                         dangerouslySetInnerHTML={{ __html: justifiedContent }}

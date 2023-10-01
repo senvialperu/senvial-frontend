@@ -34,7 +34,8 @@ export default function ArticleSelect({
       <div>
         <div className="flex flex-wrap gap-2 py-6">
           {categories.map((category: any, index: number) => {
-            if (categories === 0) return null;
+            if (category.name === "Sin categoría") return null; // Evita que se muestre el botón para la categoría "Sin categoría"
+
             return (
               <Link
                 href={`/blog/${category.slug}`}
