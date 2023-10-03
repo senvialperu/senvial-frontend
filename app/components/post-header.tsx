@@ -1,23 +1,13 @@
 import React from 'react';
-import Avatar from './avatar'
 import Date from './date'
 import CoverImage from './cover-image'
 import PostTitle from './post-title'
 import Categories from './categories'
 
-interface PostHeaderProps {
-  title: string;
-  coverImage: string;
-  date: string;
-  author: string;
-  categories: string[];
-}
-
 export default function PostHeader({
   title,
   coverImage,
   date,
-  author,
   categories,
 }: any) {
   return (

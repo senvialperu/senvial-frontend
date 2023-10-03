@@ -1,37 +1,49 @@
 'use client'
-import { FC } from 'react';
-import { useForm } from 'react-hook-form';
-import { sendEmail } from '@/app/utils/send-email';
-import { useState } from 'react';
+import React, { useRef, useState } from 'react';
 
-export type FormData = {
-    name: string;
-    email: string;
-    message: string;
-    cel: string;
-};
-
-const Contact: FC = () => {
-    const { register, handleSubmit, formState: { errors } } = useForm<FormData>();
-
-    function onSubmit(data: FormData) {
-        sendEmail(data);
+export default function FormContact() {
+    const sendEmail = () => {
+        console.log('sendEmail');
     }
+    const [phoneNumber, setPhoneNumber] = useState('');
+    const [error, setError] = useState('');
 
-    const validateEmail = (email: string) => {
-        // Expresión regular para validar un correo electrónico
+    const handlePhoneNumberChange = (e) => {
+        const inputValue = e.target.value;
+        setPhoneNumber(inputValue);
+
+        const regex = /^[0-9]+$/;
+
+
+        if (!regex.test(inputValue)) {
+            setError('Por favor, ingresa un número de teléfono válido.');
+        } else {
+            setError('');
+        }
+    };
+
+
+    // handler for mail 
+    const [email, setEmail] = useState('');
+    const [emailError, setEmailError] = useState('');
+
+    const handleEmailChange = (e) => {
+        const inputValue = e.target.value;
+        setEmail(inputValue);
+
+        // Expresión regular para validar una dirección de correo electrónico
         const emailRegex = /^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/;
-        return emailRegex.test(email) || "Ingresa un correo electrónico válido";
+
+        if (!emailRegex.test(inputValue)) {
+            setEmailError('Por favor, ingresa una dirección de correo electrónico válida.');
+        } else {
+            setEmailError('');
+        }
     };
 
-    const validatePhoneNumber = (phoneNumber: string) => {
-        // Expresión regular para validar un número de teléfono
-        const phoneRegex = /^\+?[0-9]{1,3}[ -]?[0-9]{3,3}[ -]?[0-9]{3,4}$/;
-        return phoneRegex.test(phoneNumber) || "Ingresa un número de teléfono válido (ejemplo: +51 999 999 999)";
-    };
-
+    const form = useRef();
     return (
-        <form onSubmit={handleSubmit(onSubmit)}>
+        <form onSubmit={sendEmail} ref={form}>
             <div className='mb-5'>
                 <label
                     htmlFor='name'
@@ -43,7 +55,6 @@ const Contact: FC = () => {
                     type='text'
                     placeholder='Nombre completo'
                     className='w-full rounded-md border border-gray-300 bg-white py-3 px-6 text-base font-medium text-gray-700 outline-none focus:border-secondary focus:shadow-md'
-                    {...register('name', { required: true })}
                 />
             </div>
             <div className='mb-5'>
@@ -58,12 +69,12 @@ const Contact: FC = () => {
                     id='email'
                     placeholder='example@domain.com'
                     className='w-full rounded-md border border-gray-300 bg-white py-3 px-6 text-base font-medium text-gray-700 outline-none focus:border-secondary focus:shadow-md'
-                    {...register('email', {
-                        required: "El correo es obligatorio",
-                        validate: validateEmail // Llamamos a la función de validación personalizada
-                    })}
+                    value={email}
+                    onChange={handleEmailChange}
                 />
-                {errors.email && <p className='text-red-500'>{errors.email.message}</p>}
+                {emailError && (
+                    <span className="text-red-600">{emailError}</span>
+                )}
             </div>
             <div className='mb-5'>
                 <label
@@ -77,12 +88,12 @@ const Contact: FC = () => {
                     id='cel'
                     placeholder='+51 999 999 999'
                     className='w-full rounded-md border border-gray-300 bg-white py-3 px-6 text-base font-medium text-gray-700 outline-none focus:border-secondary focus:shadow-md'
-                    {...register('cel', {
-                        required: "El número de teléfono es obligatorio",
-                        validate: validatePhoneNumber // Llamamos a la función de validación personalizada
-                    })}
+                    value={phoneNumber}
+                    onChange={handlePhoneNumberChange}
                 />
-                {errors.cel && <p className='text-red-500'>{errors.cel.message}</p>}
+                {error && (
+                    <span className="text-red-600">{error}</span>
+                )}
             </div>
             <div className='mb-5'>
                 <label
@@ -95,7 +106,6 @@ const Contact: FC = () => {
                     rows={4}
                     placeholder='Escribe tu mensaje'
                     className='w-full resize-none rounded-md border border-gray-300 bg-white py-3 px-6 text-base font-medium text-gray-700 outline-none focus:border-secondary focus:shadow-md'
-                    {...register('message', { required: true })}
                 ></textarea>
             </div>
             <div>
@@ -105,6 +115,4 @@ const Contact: FC = () => {
             </div>
         </form>
     );
-};
-
-export default Contact;
+}

@@ -12,7 +12,7 @@ export default function Logo({
   return (
     <Link
       href="/"
-      aria-label="Back to homepage"
+      aria-label="Volver al inicio"
       className="flex items-center p-2"
     >
       {src && <Image src={src} alt="logo" width={250} height={120} />}

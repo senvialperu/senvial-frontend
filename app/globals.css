@@ -45,21 +45,12 @@
   @apply transition-opacity ease-in-out duration-1000; /* Configura la transición de opacidad */
 }
 
-.card-zoom {
-  @apply relative flex items-center justify-center overflow-hidden shadow-xl w-60 h-60 rounded-2xl;
-}
-
-.card-zoom-image {
-  @apply absolute w-full h-full transition-all duration-500 ease-in-out transform bg-center bg-cover;
-}
-
-.card-zoom-text {
-  @apply absolute text-2xl bg-black font-black transition-all duration-500 ease-in-out transform scale-150 text-gray-50 opacity-60;
-}
-
-.card-zoom:hover .card-zoom-image {
-  @apply scale-150;
-}
-.card-zoom:hover .card-zoom-text {
-  @apply scale-100;
+.progress-bar {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 10px;
+  background: var(--red);
+  transform-origin: 0%;
 }

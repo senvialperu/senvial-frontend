@@ -11,39 +11,18 @@ import { ChevronDownIcon } from "@heroicons/react/24/solid";
 import { AiFillFacebook, AiFillLinkedin, AiFillTwitterCircle, AiFillYoutube } from "react-icons/ai";
 import { CgWebsite } from "react-icons/cg";
 
-import React, { useEffect, useState, useRef } from "react";
+import { motion } from "framer-motion"
 
-// auto animate for auto animate 
-import autoAnimate from '@formkit/auto-animate'
+import React, { useEffect, useState } from "react";
 
-interface ProductCategory {
-  id: number;
-  attributes: {
-    name: string;
-    slug: string;
-  };
-};
-interface Service {
-  id: number;
-  attributes: {
-    id: number;
-    slug: string;
-    title: string;
-  }
-}
+
 interface NavLink {
   id: number;
   url: string;
   newTab: boolean;
   text: string;
 }
-interface SocialNavLink {
-  id: number;
-  url: string;
-  newTab: boolean;
-  text: string;
-  social?: string;
-}
+
 interface NavExpandableLink extends NavLink {
   product_categories: {
     nodes: any;
@@ -76,12 +55,6 @@ function NavLink({ url, text }: NavLink) {
   );
 }
 function NavExpandableLink({ url, text, product_categories, serviceCategories }: any) {
-  const parentRef = useRef<HTMLDivElement>(null);
-  useEffect(() => {
-    if (parentRef.current) {
-      autoAnimate(parentRef.current);
-    }
-  }, [parentRef]);
 
   const [isExpanded, setIsExpanded] = useState(false);
   const [isExpandedServices, setIsExpandedServices] = useState(false);
@@ -102,48 +75,83 @@ function NavExpandableLink({ url, text, product_categories, serviceCategories }:
     setIsExpandedServices(false);
   };
 
+  const variants1 = {
+    open: { opacity: 1, x: 0 },
+    closed: { opacity: 0, y: -20 },
+  }
+
+  const variants = {
+    open: { opacity: 1, x: 0, y: -40 },
+    closed: { opacity: 0, x: "-20%", y: -40 },
+  }
+
+  const listItemVariants = {
+    closed: { opacity: 0, y: -20 }, // Estado inicial oculto
+    open: { opacity: 1, y: 0 }, // Estado visible sin retraso
+  };
   return (
-    <div className="px-10 relative group w-auto justify-center lg:w-full" onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave} ref={parentRef}>
+
+    <div className="px-10 relative group w-auto justify-center lg:w-full" onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>
       <Link href={url} className={`flex items-center -mb-1`}>
         {text}
       </Link>
-
-      {isExpanded && (
+      <motion.nav
+        animate={isExpanded ? 'open' : 'closed'}
+        variants={variants1}
+        className={`absolute w-full left-0 bg-transparent z-10 pt-2 ${isExpanded ? 'block' : 'hidden'}`}
+      >
         <div className="absolute w-full left-0 bg-transparent z-10 pt-2" style={{ top: '100%' }}>
           <div className="w-[95%]">
-            <ul className="flex flex-col gap-[2px]">
-              {product_categories.nodes.map((item: any) => (
-                <Link href={`/productos/${item.slug}`} className={`  p-2 bg-black w-full hover:bg-secondary hover:text-primary-content`} key={item.id}>
-                  <p className="w-full">{item.name}</p>
-                </Link>
+            <motion.ul
+              initial={{ '--rotate': '0deg' } as any}
+              animate={{ '--rotate': '360deg' } as any}
+              transition={{ duration: 5 }}
+              className="flex flex-col gap-[2px]"
+            >
+              {product_categories.nodes.map((item: any, index: number) => (
+                <motion.li
+                  key={index}
+                  variants={listItemVariants}
+                  className="p-2 bg-black w-full hover:bg-secondary hover:text-primary-content"
+                >
+                  <Link href={`/productos/${item.slug}`}>
+                    <p className="w-full">{item.name}</p>
+                  </Link>
+                </motion.li>
               ))}
               <div
                 onMouseEnter={handleMouseEnterServices}
                 onMouseLeave={handleMouseLeaveServices}
-                ref={parentRef}
                 style={{ position: 'relative', zIndex: 10 }}
               >
                 <Link href={'/servicios'} className={`flex items-center bg-secondary `}>
                   <p className="p-2 w-full text-primary-content">SERVICIOS</p>
                 </Link>
-                {isExpandedServices && (
+                <motion.ul
+                  animate={isExpandedServices ? 'open' : 'closed'}
+                  variants={variants}
+                >
                   <div className="absolute left-0 bg-transparent z-10" style={{ top: '0', marginLeft: '100%' }}>
                     <ul className="flex flex-col gap-[2px]">
                       {serviceCategories.nodes.map((item: any) => (
-                        <li key={item.title} className="p-2 bg-black hover:bg-secondary hover:text-primary-content w-full">
+                        <motion.li
+                          key={item.title}
+                          variants={listItemVariants}
+                          className="p-2 bg-black hover:bg-secondary hover:text-primary-content w-full"
+                        >
                           <Link href={`/servicios/${item.slug}`} className={``}>
                             <p className="w-48">{item.title}</p>
                           </Link>
-                        </li>
+                        </motion.li>
                       ))}
                     </ul>
                   </div>
-                )}
+                </motion.ul>
               </div>
-            </ul>
+            </motion.ul>
           </div>
         </div>
-      )}
+      </motion.nav>
     </div>
   );
 }
@@ -153,15 +161,15 @@ function MobileNavLink({ url, text, closeMenu }: MobileNavLink) {
     closeMenu();
   }
   return (
-    <a className="flex">
-      <Link
-        href={url}
-        onClick={handleClick}
-        className={`-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-default hover:text-secondary hover:bg-gray-90}`}
-      >
-        {text}
-      </Link>
-    </a>
+
+    <Link
+      href={url}
+      onClick={handleClick}
+      className={`-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-default hover:text-secondary hover:bg-gray-90} flex`}
+    >
+      {text}
+    </Link>
+
   );
 }
 function MobileNavExpandableLink({ url, text, product_categories, serviceCategories, closeMenu }: MobileExpandableNavLink) {
@@ -369,14 +377,14 @@ export default function Navbar({
                 <div className=" divide-y divide-gray-200/10">
                   <div className="space-y-2 py-6">
                     {links.slice(0, linksMiddle).map((item: any, index: number) => (
-                      <MobileNavLink {...item} key={item.id}
+                      <MobileNavLink {...item} key={index}
                         closeMenu={closeMenu} />
                     ))}
                     {acordeonLinks.map((link: any, index: number) => (
-                      <MobileNavExpandableLink key={link.id} product_categories={acordeonLinks[0].productCategories} serviceCategories={acordeonLinks[0].serviceCategories} url="/" newTab={false} text="PRODUCTOS Y SERVICIOS" id={index} closeMenu={closeMenu} />
+                      <MobileNavExpandableLink key={index} product_categories={acordeonLinks[0].productCategories} serviceCategories={acordeonLinks[0].serviceCategories} url="/" newTab={false} text="PRODUCTOS Y SERVICIOS" id={index} closeMenu={closeMenu} />
                     ))}
                     {links.slice(linksMiddle).map((item: any, index: number) => (
-                      <MobileNavLink key={item.id}
+                      <MobileNavLink key={index}
                         closeMenu={closeMenu} {...item} />
                     ))}
                   </div>
@@ -394,8 +402,8 @@ export default function Navbar({
         </div>
       </div>
 
-      <div className={`lg:flex hidden align-middle items-center justify-center text-default w-[80%] mx-auto text-base-100 sticky ${isSticky ? 'top-0 w-full ' : 'bottom-10'} z-10`} style={{ marginBottom: "-50px", width: '100%' }}>
-        <div className={`bg-primary-content w-full p-10 ${isSticky ? 'py-6 ' : ''}`} style={{ width: isSticky ? '100%' : '80%' }}>
+      <div className={`lg:flex hidden align-middle items-center justify-center text-default w-[80%] mx-auto text-base-100 sticky ${isSticky ? 'top-0 ' : 'bottom-10'} z-10`} style={{ marginBottom: "-50px", width: '100%' }}>
+        <div className={`bg-primary-content w-full p-10 ${isSticky ? 'py-6 ease-in-out delay-150 bg duration-300' : 'ease-in-out delay-150 bg duration-300'}`} style={{ width: isSticky ? '100%' : '80%' }}>
           <ul className="flex justify-center divide-x divide-slate-500">
             {sortedNavLinks.slice(0, linksMiddle).map((item: any, index: number) => (
               <span
@@ -406,9 +414,8 @@ export default function Navbar({
               </span>
             ))}
             {acordeonLinks.map((link: any, index: number) => (
-              <span className={`w-auto`}
-                key={index}>
-                <NavExpandableLink key={link.id} product_categories={acordeonLinks[0].productCategories} serviceCategories={acordeonLinks[0].serviceCategories} url="/productos" newTab={false} text="PRODUCTOS Y SERVICIOS" id={index} />
+              <span className={`w-auto`} key={index}>
+                <NavExpandableLink product_categories={acordeonLinks[0].productCategories} serviceCategories={acordeonLinks[0].serviceCategories} url="/productos" newTab={false} text="PRODUCTOS Y SERVICIOS" id={index} />
               </span>
             ))}
             {sortedNavLinks.slice(linksMiddle).map((item: any, index: number) => (
