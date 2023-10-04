@@ -199,17 +199,12 @@ function MobileNavExpandableLink({ url, text, product_categories, serviceCategor
       {isExpanded && (
         <div className="relative w-full left-0 bg-transparent z-10 pt-2" style={{ top: '100%' }}>
           <ul className="flex flex-col">
-            {product_categories.nodes.map((item: any) => (
-              <li key={item.name} className="p-2 w-full hover:bg-secondary hover:text-primary-content">
+            {product_categories.nodes.map((item: any, index: number) => (
+              <li key={index} className="p-2 w-full hover:bg-secondary hover:text-primary-content">
                 <Link href={`/productos/${item.slug}`} className="border-b-2 border-transparent" onClick={handleClickLink}>
                   <p className="w-full">{item.name}</p>
                 </Link>
               </li>
-            ))}
-            {product_categories.nodes.map((item: any) => (
-              <Link href={`/productos/${item.slug}`} className={`p-2 w-full hover:bg-secondary hover:text-primary-content`} key={item.id} onClick={handleClickLink}>
-                <p className="w-full">{item.name}</p>
-              </Link>
             ))}
             <li onClick={handleClickServices} className="p-2 hover:text-primary-content w-full cursor-pointer">
               <div className={`flex items-center mx-4 -mb-1 border-b-2 border-transparent`}>
