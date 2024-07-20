@@ -56,8 +56,6 @@ export default async function RootLayout({ children, }: { children: React.ReactN
   return (
     <html lang="es">
       <body className={`${quicksand.className}`}>
-        <WhatsappButton logoUrl={logo} />
-
         <Navbar locationText={location} logoUrl={navbarLogo.mediaItemUrl} whatsappLink={whatsapp} links={links} socialLinks={socialLinks} acordeonLinks={acordeonLinks} logoText="senvial" />
 
         <main>
